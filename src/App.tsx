@@ -10,7 +10,7 @@ import { ProtectedRoute } from './components/protected-route'
 import { AppLayout } from './components/app-layout'
 
 export const App = () => {
-  const [isLoggedIn] = useState<boolean>(false)
+  const [isLoggedIn] = useState<boolean>(true)
   const [userType] = useState<'user' | 'admin'>('admin')
 
   return (
@@ -22,7 +22,7 @@ export const App = () => {
             <>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={<Navigate to="/login" />} />
             </>
           )}
 
