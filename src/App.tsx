@@ -1,55 +1,63 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { Login } from './components/login'
-import { SignUp } from './components/signup'
-import { UserDetails } from './components/user-details'
-import { AdminHome } from './components/admin-home'
-import { Cart } from './components/cart'
-import { About } from './components/about'
-import { ProtectedRoute } from './components/protected-route'
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom'
+import { HomePage } from './pages/home-page'
+import { About } from './pages/about-page'
+import { BlogPage } from './pages/blog-page'
+import { CreatePost } from './pages/create-post'
+import { EditPost } from './pages/edit-post'
+import { NotFoundPage } from './pages/not-found-page'
+import { LoginPage } from './pages/login-page'
 import { AppLayout } from './components/app-layout'
+import { RequireAuth } from './hoc/require-auth'
+import { RegistrationPage } from './pages/registration-page'
+import { RequireNotAuth } from './hoc/require-not-auth'
+import { AuthLayout } from './components/auth-layout'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<AuthLayout />}>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="about" element={<About />}>
+          <Route path="contacts" element={<p>Our contact</p>} />
+          <Route path="team" element={<p>Our team</p>} />
+        </Route>
+        <Route path="posts" element={<BlogPage />} />
+        <Route path="posts/:id/edit" element={<EditPost />} />
+        <Route
+          path="posts/new"
+          element={
+            <RequireAuth>
+              <CreatePost />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="login"
+          element={
+            <RequireNotAuth>
+              <LoginPage />
+            </RequireNotAuth>
+          }
+        />
+        <Route
+          path="registration"
+          element={
+            <RequireNotAuth>
+              <RegistrationPage />
+            </RequireNotAuth>
+          }
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Route>,
+  ),
+)
 
 export const App = () => {
-  const [isLoggedIn] = useState<boolean>(true)
-  const [userType] = useState<'user' | 'admin'>('admin')
-
-  return (
-    <BrowserRouter>
-      <AppLayout isLoggedIn={isLoggedIn} userType={userType}>
-        <Routes>
-          {/* unauthorized route */}
-          {!isLoggedIn && (
-            <>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/" element={<Navigate to="/login" />} />
-            </>
-          )}
-
-          {/* ProtectedRoutes */}
-          <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
-            <Route path="/login" element={<Navigate to="/" />} />
-            <Route path="/register" element={<Navigate to="/" />} />
-            <Route path="/cart" element={<Cart />} />
-            {userType !== 'admin' ? (
-              <>
-                <Route path="/" element={<Navigate to="/user-details" />} />
-                <Route path="/user-details" element={<UserDetails />} />
-                <Route path="/admin-dashboard" element={<Navigate to="/" />} />
-              </>
-            ) : (
-              <>
-                <Route path="/" element={<Navigate to="/admin-dashboard" />} />
-                <Route path="/admin-dashboard" element={<AdminHome />} />
-                <Route path="/user-details" element={<Navigate to="/" />} />
-              </>
-            )}
-          </Route>
-
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </AppLayout>
-    </BrowserRouter>
-  )
+  return <RouterProvider router={router} />
 }

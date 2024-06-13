@@ -1,21 +1,22 @@
-import { PropsWithChildren } from 'react'
-import { Navbar } from './navbar'
+import { Outlet } from 'react-router-dom'
+import { CustomLink } from './custom-link'
 
-type Props = Readonly<{
-  isLoggedIn: boolean
-  userType: 'user' | 'admin'
-}>
-
-export const AppLayout = ({
-  isLoggedIn,
-  userType,
-  children,
-}: PropsWithChildren<Props>) => {
+export const AppLayout = () => {
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} userType={userType} />
-      {children}
-      <span>footer</span>
+      <header>
+        <CustomLink to="/">Home</CustomLink>
+        <CustomLink to="/posts">Blog</CustomLink>
+        <CustomLink to="/about">About</CustomLink>
+        <CustomLink to="/login">Login</CustomLink>
+        <CustomLink to="/registration">Registration</CustomLink>
+      </header>
+
+      <main className="container">
+        <Outlet />
+      </main>
+
+      <footer className="container">&copy; ReactRouter Tutorials 2022</footer>
     </>
   )
 }
