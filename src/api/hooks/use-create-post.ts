@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { IPost } from '../types/post'
-import { postService } from '../services'
+import { IPost } from 'api/types/post'
+import { postService } from 'api/services'
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient()

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { CustomLink } from './custom-link'
+import { CustomLink } from 'layout/custom-link'
 
 export const AppLayout = () => {
   return (
@@ -16,7 +16,7 @@ export const AppLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="container">&copy; ReactRouter Tutorials 2022</footer>
+      <footer className="container">&copy; Agropolex 2024</footer>
     </>
   )
 }

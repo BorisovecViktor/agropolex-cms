@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useContext, useMemo } from 'react'
-import { useLocalStorage } from './use-local-storage'
+import { useLocalStorage } from 'lib/hooks/use-local-storage'
 
 export type IUser = {
   userId: number

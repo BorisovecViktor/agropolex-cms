@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/use-auth'
+import { useAuth } from 'lib/hooks/use-auth'
 
 export const RegistrationPage = () => {
   const navigate = useNavigate()

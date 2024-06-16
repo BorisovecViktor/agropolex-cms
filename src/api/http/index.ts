@@ -1,35 +1,45 @@
 import axios from 'axios'
-import { IUser } from '../../hooks/use-auth'
+import { IUser } from 'lib/hooks/use-auth'
 
-export const API_URL = 'https://jsonplaceholder.typicode.com'
+export const API_URL = process.env.REACT_APP_API_URL
 export const USER_KEY = 'user'
+const username = 'WebUser'
+const password = 'T@DMt7k}By~8'
+// var credentials = btoa(username + ':' + password)
+// var basicAuth = 'Basic ' + credentials
 
 export const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Credentials': true,
+  },
+  auth: {
+    username,
+    password,
   },
 })
 
-$api.interceptors.request.use(
-  (config) => {
-    const user = localStorage.getItem(USER_KEY)
+// $api.interceptors.request.use(
+//   (config) => {
+//     const user = localStorage.getItem(USER_KEY)
 
-    if (user) {
-      const userData: IUser = JSON.parse(user)
+//     if (user) {
+//       const userData: IUser = JSON.parse(user)
 
-      if (userData.accessToken) {
-        config.headers['Authorization'] = `Bearer ${userData.accessToken}`
-      }
-    }
+//       if (userData?.accessToken) {
+//         config.headers['Authorization'] = `Bearer ${userData.accessToken}`
+//       }
+//     }
 
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  },
-)
+//     return config
+//   },
+//   (error) => {
+//     return Promise.reject(error)
+//   },
+// )
 
 $api.interceptors.response.use(
   (response) => response,
@@ -45,7 +55,7 @@ $api.interceptors.response.use(
         if (user) {
           const userData: IUser = JSON.parse(user)
 
-          if (userData.refreshToken) {
+          if (userData?.refreshToken) {
             const response = await axios.post(`${API_URL}/refresh`, {
               refreshToken: userData.refreshToken,
             })

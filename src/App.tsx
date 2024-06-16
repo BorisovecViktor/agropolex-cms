@@ -4,18 +4,18 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import { HomePage } from './pages/home-page'
-import { About } from './pages/about-page'
-import { BlogPage } from './pages/blog-page'
-import { CreatePost } from './pages/create-post'
-import { EditPost } from './pages/edit-post'
-import { NotFoundPage } from './pages/not-found-page'
-import { LoginPage } from './pages/login-page'
-import { AppLayout } from './components/app-layout'
-import { RequireAuth } from './hoc/require-auth'
-import { RegistrationPage } from './pages/registration-page'
-import { RequireNotAuth } from './hoc/require-not-auth'
-import { AuthLayout } from './components/auth-layout'
+import { HomePage } from 'app/pages/home-page'
+import { About } from 'app/pages/about-page'
+import { BlogPage } from 'app/pages/blog-page'
+import { CreatePost } from 'app/pages/create-post'
+import { EditPost } from 'app/pages/edit-post'
+import { NotFoundPage } from 'app/pages/not-found-page'
+import { LoginPage } from 'app/pages/login-page'
+import { RegistrationPage } from 'app/pages/registration-page'
+import { AppLayout } from 'layout/app-layout'
+import { RequireAuth } from 'components/hoc/require-auth'
+import { RequireNotAuth } from 'components/hoc/require-not-auth'
+import { AuthLayout } from 'layout/auth-layout'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

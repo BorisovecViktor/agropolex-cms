@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from 'react-router-dom'
-import { useAuth } from '../hooks/use-auth'
+import { useAuth } from 'lib/hooks/use-auth'
 import { PropsWithChildren } from 'react'
 
 export const RequireAuth = ({ children }: PropsWithChildren) => {

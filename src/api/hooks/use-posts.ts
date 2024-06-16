@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { postService } from '../services'
+import { postService } from 'api/services'
 
 export const usePosts = (isEnabled: boolean) => {
   const { data, isLoading, isSuccess, isError } = useQuery({
