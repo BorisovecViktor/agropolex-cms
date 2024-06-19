@@ -1,4 +1,5 @@
 import { Link, useMatch } from 'react-router-dom'
+import { grey, blue } from '@mui/material/colors'
 
 export const CustomLink = ({ children, to, ...props }: any) => {
   const match = useMatch({
@@ -10,7 +11,10 @@ export const CustomLink = ({ children, to, ...props }: any) => {
     <Link
       to={to}
       style={{
-        color: match ? 'var(--color-active)' : 'grey',
+        width: '100%',
+        color: match ? blue[800] : grey[600],
+        padding: '5px 10px',
+        textDecoration: 'none',
       }}
       {...props}
     >

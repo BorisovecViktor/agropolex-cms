@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { postService } from 'api/services'
+import { categoryService } from 'api/services'
 
-export const usePosts = (isEnabled: boolean) => {
+export const useCategories = (isEnabled: boolean) => {
   const { data, isLoading, isSuccess, isError } = useQuery({
-    queryKey: ['posts'],
-    queryFn: () => postService.getPosts(),
+    queryKey: ['categories'],
+    queryFn: () => categoryService.getCategories(),
     select: (data) => data.data,
     enabled: isEnabled,
   })

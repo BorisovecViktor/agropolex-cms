@@ -5,16 +5,12 @@ export const API_URL = process.env.REACT_APP_API_URL
 export const USER_KEY = 'user'
 const username = 'WebUser'
 const password = 'T@DMt7k}By~8'
-// var credentials = btoa(username + ':' + password)
-// var basicAuth = 'Basic ' + credentials
 
 export const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Credentials': true,
   },
   auth: {
     username,

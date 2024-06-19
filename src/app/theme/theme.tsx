@@ -7,14 +7,7 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      default: palette.milkyGray,
-    },
-    common: {
-      black: palette.black,
-      white: palette.white,
-    },
-    primary: {
-      main: palette.black,
+      default: palette.background,
     },
   },
   shape: {
@@ -22,7 +15,27 @@ const theme = createTheme({
   },
   breakpoints: breakpointsTheme.breakpoints,
   typography,
-  components: {},
+  components: {
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          borderBottomLeftRadius: 6,
+          borderBottomRightRadius: 6,
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.04)',
+          },
+        },
+      },
+    },
+  },
 })
 
 export { theme }
