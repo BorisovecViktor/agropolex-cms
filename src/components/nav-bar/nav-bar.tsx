@@ -7,11 +7,11 @@ export const Navbar = () => {
 
   return (
     <>
-      {categories && (
+      {categories && categories.length > 0 && (
         <List component="nav" sx={{ display: { xs: 'none', md: 'flex' } }}>
           <List sx={{ display: 'flex', flexWrap: 'wrap' }}>
             {categories.map((category) => (
-              <NavBarItem key={category.Category_ID} item={category} />
+              <NavBarItem key={category.id} item={category} />
             ))}
           </List>
         </List>

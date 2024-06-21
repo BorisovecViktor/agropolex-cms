@@ -42,8 +42,8 @@ export const BlogPage = () => {
         <p>'Loading'</p>
       ) : categories?.length ? (
         categories.map((category) => (
-          <Link key={category.Category_ID} to={category.Category_ID}>
-            <li key={category.Category_ID}>{category.Category_ID}</li>
+          <Link key={category.id} to={category.path}>
+            <li key={category.id}>{category.path}</li>
           </Link>
         ))
       ) : (

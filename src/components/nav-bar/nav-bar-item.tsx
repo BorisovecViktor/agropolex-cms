@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { NavBarSubItems } from './nav-bar-sub-items'
 import { ListItem } from '@mui/material'
 import { ICategory } from 'api/types/category'
-import { CustomLink } from './custom-link'
+import { CustomLink } from 'components/custom-link'
 
 type Props = {
   item: ICategory
 }
 
 export const NavBarItem = ({ item }: Props) => {
-  const { Category_Name, Subcategories } = item
+  const { path, name, subCategories } = item
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -18,8 +18,8 @@ export const NavBarItem = ({ item }: Props) => {
       onMouseLeave={() => setIsOpen(false)}
       sx={{ width: 'auto' }}
     >
-      <CustomLink to={`/${Category_Name}`}>{Category_Name}</CustomLink>
-      {isOpen && <NavBarSubItems subItems={Subcategories} onOpen={setIsOpen} />}
+      <CustomLink to={`/categories${path}`}>{name}</CustomLink>
+      {isOpen && <NavBarSubItems subItems={subCategories} onOpen={setIsOpen} />}
     </ListItem>
   )
 }

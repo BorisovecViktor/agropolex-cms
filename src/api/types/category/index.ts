@@ -1,10 +1,12 @@
 export type ISubCategory = {
-  Subcategory_ID: string
-  Subcategory_Name: string
+  id: string
+  name: string
+  path: string
 }
 
 export type ICategory = {
-  Category_ID: string
-  Category_Name: string
-  Subcategories: Array<ISubCategory>
+  id: string
+  name: string
+  path: string
+  subCategories: Array<ISubCategory>
 }

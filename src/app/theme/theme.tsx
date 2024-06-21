@@ -2,6 +2,7 @@ import { createTheme } from '@mui/material/styles'
 import { breakpointsTheme } from './breakpoints'
 import { palette } from './palette'
 import { typography } from './typography'
+import { grey } from '@mui/material/colors'
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,25 @@ const theme = createTheme({
           padding: 0,
           '&:hover': {
             backgroundColor: 'rgba(0, 0, 0, 0.04)',
+          },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:last-child td, &:last-child th': { border: 0 },
+          '&:nth-of-type(even)': {
+            backgroundColor: grey[50],
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          '&.MuiTableCell-head': {
+            backgroundColor: grey[400],
           },
         },
       },

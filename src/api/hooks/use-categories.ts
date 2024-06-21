@@ -8,6 +8,7 @@ export const useCategories = (isEnabled: boolean) => {
     queryFn: () => categoryService.getCategories(),
     select: (data) => data.data,
     enabled: isEnabled,
+    refetchOnWindowFocus: false,
   })
 
   useEffect(() => {

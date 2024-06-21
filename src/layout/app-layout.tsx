@@ -10,9 +10,9 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import avatar from 'assets/icons/avatar.png'
 import { useState } from 'react'
-import { CustomLink } from './custom-link'
+import { CustomLink } from 'components/custom-link'
 import { useMediaQuery, useTheme } from '@mui/material'
-import { Navbar } from './nav-bar'
+import { Navbar } from 'components/nav-bar'
 import { blue } from '@mui/material/colors'
 
 const settings = [
@@ -49,7 +49,7 @@ export const AppLayout = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+      <AppBar position="static" sx={{ mb: 2, backgroundColor: 'white' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* Mobile ------------------------------------------------ */}
