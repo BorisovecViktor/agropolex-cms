@@ -3,15 +3,19 @@ import { useInView } from 'react-intersection-observer'
 import { ProductItem } from './product-item'
 import { useProducts } from 'api/hooks/use-products'
 import {
+  Box,
+  CircularProgress,
   Paper,
   Table,
   TableBody,
   TableCell,
+  TableCellProps,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
-import { Loading as LoadingIcon } from 'assets/icons/loading'
+import { grey } from '@mui/material/colors'
 // import { useParams } from 'react-router-dom'
 
 export const ProductList = () => {
@@ -40,33 +44,51 @@ export const ProductList = () => {
       {
         id: 'name',
         label: 'Name',
+        align: 'left',
       },
       {
         id: 'manufacturer',
         label: 'Manufacturer',
-      },
-      {
-        id: 'amount',
-        label: 'Amount',
+        align: 'left',
       },
       {
         id: 'availability',
         label: 'Availability',
+        align: 'center',
+      },
+      {
+        id: 'balance',
+        label: 'Balance',
+        align: 'center',
       },
       {
         id: 'price',
         label: 'Price',
+        align: 'center',
       },
       {
         id: 'actions',
         label: 'Actions',
+        align: 'center',
       },
     ],
     [],
   )
 
   if (status === 'pending') {
-    return <p>Loading...</p>
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="100%"
+        sx={{
+          color: grey[500],
+        }}
+      >
+        <CircularProgress color="inherit" size={37} />
+      </Box>
+    )
   }
 
   if (status === 'error') {
@@ -74,12 +96,17 @@ export const ProductList = () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '50vh' }}>
+    <TableContainer component={Paper} sx={{ maxHeight: '60%' }}>
       <Table stickyHeader aria-label="products table" sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
             {headCells.map((headCell) => (
-              <TableCell key={headCell.id}>{headCell.label}</TableCell>
+              <TableCell
+                key={headCell.id}
+                align={headCell.align as TableCellProps['align']}
+              >
+                <Typography fontWeight={600}>{headCell.label}</Typography>
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -90,19 +117,30 @@ export const ProductList = () => {
                 return (
                   <ProductItem
                     key={product.id}
-                    product={product}
+                    productItem={product}
                     innerRef={ref}
                   />
                 )
               }
 
-              return <ProductItem key={product.id} product={product} />
+              return <ProductItem key={product.id} productItem={product} />
             }),
           )}
           {isFetchingNextPage && (
             <TableRow>
-              <TableCell colSpan={5} align="center" sx={{ py: '17px' }}>
-                <LoadingIcon color="grey" height="19px" width="100%" />
+              <TableCell
+                colSpan={6}
+                align="center"
+                sx={{
+                  p: 1,
+                  color: grey[500],
+                }}
+              >
+                <CircularProgress
+                  color="inherit"
+                  size={37}
+                  sx={{ verticalAlign: 'middle' }}
+                />
               </TableCell>
             </TableRow>
           )}

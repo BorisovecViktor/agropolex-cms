@@ -17,7 +17,12 @@ const h1 = {
     lineHeight: '52px',
   },
 } as const
+const body1 = {
+  fontSize: 14,
+}
 
 export const typography = {
+  fontFamily: ['Inter', 'Arial', 'sans-serif'].join(','),
   h1,
+  body1,
 } as const

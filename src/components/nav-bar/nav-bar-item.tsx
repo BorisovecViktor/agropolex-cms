@@ -18,7 +18,9 @@ export const NavBarItem = ({ item }: Props) => {
       onMouseLeave={() => setIsOpen(false)}
       sx={{ width: 'auto' }}
     >
-      <CustomLink to={`/categories${path}`}>{name}</CustomLink>
+      <CustomLink to={`/categories${path}`} fontWeight={600}>
+        {name}
+      </CustomLink>
       {isOpen && <NavBarSubItems subItems={subCategories} onOpen={setIsOpen} />}
     </ListItem>
   )

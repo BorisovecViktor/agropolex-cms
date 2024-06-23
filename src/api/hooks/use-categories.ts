@@ -13,13 +13,11 @@ export const useCategories = (isEnabled: boolean) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('success')
     }
   }, [isSuccess])
 
   useEffect(() => {
     if (isError) {
-      console.log('error')
     }
   }, [isError])
 

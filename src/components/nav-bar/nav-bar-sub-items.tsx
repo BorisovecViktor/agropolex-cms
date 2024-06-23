@@ -14,7 +14,7 @@ export const NavBarSubItems = ({ subItems, onOpen }: Props) => (
       <List
         sx={{
           position: 'absolute',
-          top: '34px',
+          top: '31px',
           maxHeight: '50vh',
           backgroundColor: 'white',
           overflowY: 'scroll',

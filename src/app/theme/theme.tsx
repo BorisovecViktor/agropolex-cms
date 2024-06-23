@@ -3,6 +3,7 @@ import { breakpointsTheme } from './breakpoints'
 import { palette } from './palette'
 import { typography } from './typography'
 import { grey } from '@mui/material/colors'
+import InterRegularWoff2 from 'assets/fonts/Inter-Regular.woff2'
 
 const theme = createTheme({
   palette: {
@@ -17,6 +18,33 @@ const theme = createTheme({
   breakpoints: breakpointsTheme.breakpoints,
   typography,
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 400;
+          src: local('Inter'), local('Inter-Regular'), url(${InterRegularWoff2}) format('woff2');
+          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+        }
+      `,
+    },
+    MuiTextField: {
+      defaultProps: {
+        autoComplete: 'nope',
+        fullWidth: true,
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          '& fieldset': {
+            borderColor: grey[400],
+            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
+          },
+        },
+      },
+    },
     MuiList: {
       styleOverrides: {
         root: {

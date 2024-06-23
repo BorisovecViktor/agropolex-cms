@@ -5,15 +5,15 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-import avatar from 'assets/icons/avatar.png'
 import { useState } from 'react'
 import { CustomLink } from 'components/custom-link'
-import { useMediaQuery, useTheme } from '@mui/material'
+import { Stack, useMediaQuery, useTheme } from '@mui/material'
 import { Navbar } from 'components/nav-bar'
-import { blue } from '@mui/material/colors'
+import { blue, grey } from '@mui/material/colors'
+import { CartNavItem } from 'components/cart'
+import PersonIcon from '@mui/icons-material/Person'
 
 const settings = [
   {
@@ -27,12 +27,10 @@ const settings = [
 ]
 const logoStyles = {
   fontSize: 28,
-  fontWeight: 700,
   letterSpacing: '.2rem',
   color: blue[800],
-  textTransform: 'uppercase',
   textDecoration: 'none',
-} as const
+}
 
 export const AppLayout = () => {
   const theme = useTheme()
@@ -48,10 +46,10 @@ export const AppLayout = () => {
   }
 
   return (
-    <>
-      <AppBar position="static" sx={{ mb: 2, backgroundColor: 'white' }}>
+    <Stack sx={{ height: '100vh' }}>
+      <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ height: '68px' }}>
             {/* Mobile ------------------------------------------------ */}
             {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -88,7 +86,7 @@ export const AppLayout = () => {
                 ))}
               </Menu>
             </Box> */}
-            <CustomLink
+            {/* <CustomLink
               to="/"
               style={{
                 display: mdUpMatch ? 'none' : 'flex',
@@ -96,19 +94,20 @@ export const AppLayout = () => {
                 ...logoStyles,
               }}
             >
-              agropolex
-            </CustomLink>
+              AGROPOLEX
+            </CustomLink> */}
 
             {/* Desktop ------------------------------------ */}
             <CustomLink
               to="/"
+              fontWeight={600}
               style={{
                 display: mdUpMatch ? 'flex' : 'none',
                 marginRight: '30px',
                 ...logoStyles,
               }}
             >
-              agropolex
+              AGROPOLEX
             </CustomLink>
             <Box sx={{ flexGrow: 1 }}>
               <Navbar />
@@ -116,8 +115,13 @@ export const AppLayout = () => {
             {/* Settings ------------------------------------------ */}
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenSettings} sx={{ p: 0 }}>
-                  <Avatar alt="Avatar" src={avatar} />
+                <IconButton onClick={handleOpenSettings}>
+                  <PersonIcon
+                    color="primary"
+                    sx={{
+                      fontSize: '25px',
+                    }}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -142,17 +146,32 @@ export const AppLayout = () => {
                 ))}
               </Menu>
             </Box>
+            {/* Cart --------------------------------------------- */}
+            <CartNavItem />
           </Toolbar>
         </Container>
       </AppBar>
 
-      <main>
-        <Container maxWidth="xl">
-          <Outlet />
-        </Container>
-      </main>
+      <Container
+        component="main"
+        maxWidth="xl"
+        sx={{ height: '100%', overflow: 'hidden', py: 1 }}
+      >
+        <Outlet />
+      </Container>
 
-      {/* <footer>&copy; Agropolex 2024</footer> */}
-    </>
+      <Stack
+        component="footer"
+        direction="row"
+        alignItems="center"
+        height="68px"
+        sx={{
+          borderTop: `1px solid ${grey[300]}`,
+          backgroundColor: 'white',
+        }}
+      >
+        <Container maxWidth="xl">&copy; Agropolex 2024</Container>
+      </Stack>
+    </Stack>
   )
 }
