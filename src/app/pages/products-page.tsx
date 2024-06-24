@@ -1,9 +1,19 @@
-import { CartList } from 'components/cart'
-import { ProductList } from 'modules/product'
+import { Stack } from '@mui/material'
+import { ProductCartList } from 'modules/product-cart'
+import {
+  ProductAdvertising,
+  ProductFilters,
+  ProductList,
+} from 'modules/product'
+import { MAIN_SPACING } from 'layout/app-layout'
 
 export const ProductsPage = () => (
-  <>
-    <ProductList />
-    <CartList />
-  </>
+  <Stack direction="row" height="100%" spacing={1}>
+    <ProductAdvertising />
+    <Stack flexGrow={1} width="60%" spacing={MAIN_SPACING}>
+      <ProductList />
+      <ProductCartList />
+    </Stack>
+    <ProductFilters />
+  </Stack>
 )

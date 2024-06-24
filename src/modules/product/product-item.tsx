@@ -1,7 +1,13 @@
-import { IconButton, TableCell, TableRow, Typography } from '@mui/material'
+import {
+  IconButton,
+  TableCell,
+  TableRow,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { IProduct } from './type'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
-import { green } from '@mui/material/colors'
+import { blue, green } from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom'
 
 const cellOverflowStyles = {
@@ -25,10 +31,10 @@ export const ProductItem = ({ productItem, innerRef, ...props }: Props) => {
       key={id}
       ref={innerRef}
       onClick={() => navigate(`/product/${id}`)}
-      sx={{ cursor: 'pointer' }}
+      sx={{ cursor: 'pointer', '&:hover': { backgroundColor: blue[50] } }}
       {...props}
     >
-      <TableCell component="th" scope="row" width="30%" sx={cellOverflowStyles}>
+      <TableCell component="th" scope="row" width="25%" sx={cellOverflowStyles}>
         <Typography component="span">{title}</Typography>
       </TableCell>
       <TableCell component="th" scope="row" width="20%" sx={cellOverflowStyles}>
@@ -38,15 +44,15 @@ export const ProductItem = ({ productItem, innerRef, ...props }: Props) => {
         component="th"
         scope="row"
         align="center"
-        width="10%"
+        width="5%"
         sx={{ color: green[500] }}
       >
         <Typography>Yes</Typography>
       </TableCell>
-      <TableCell component="th" scope="row" align="center" width="20%">
+      <TableCell component="th" scope="row" align="center" width="30%">
         <Typography>{userId}</Typography>
       </TableCell>
-      <TableCell component="th" scope="row" align="center" width="10%">
+      <TableCell component="th" scope="row" align="center" width="15%">
         <Typography>{`${id} UAH`}</Typography>
       </TableCell>
       <TableCell
@@ -54,26 +60,28 @@ export const ProductItem = ({ productItem, innerRef, ...props }: Props) => {
         scope="row"
         align="center"
         sx={{ p: 0 }}
-        width="10%"
+        width="5%"
       >
-        <IconButton
-          aria-label="Add to cart"
-          onClick={(e) => {
-            e.stopPropagation()
-            console.log(`${title} -> successfully added to cart`)
-          }}
-          sx={{
-            '&:hover': { backgroundColor: green[50] },
-            '&:hover svg': { color: green[700] },
-          }}
-        >
-          <AddShoppingCartIcon
-            sx={{
-              fontSize: '20px',
-              color: green[500],
+        <Tooltip title="Add to cart" arrow placement="left">
+          <IconButton
+            aria-label="Add to cart"
+            onClick={(e) => {
+              e.stopPropagation()
+              console.log(`${title} -> successfully added to cart`)
             }}
-          />
-        </IconButton>
+            sx={{
+              '&:hover': { backgroundColor: green[100] },
+              '&:hover svg': { color: green[700] },
+            }}
+          >
+            <AddShoppingCartIcon
+              sx={{
+                fontSize: '20px',
+                color: green[500],
+              }}
+            />
+          </IconButton>
+        </Tooltip>
       </TableCell>
     </TableRow>
   )

@@ -10,11 +10,12 @@ import {
   Typography,
 } from '@mui/material'
 import { useMemo } from 'react'
-import { CartItem } from './cart-item'
+import { ProductCartItem } from './product-cart-item'
 import { useProducts } from 'api/hooks/use-products'
+import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 
-export const CartList = () => {
-  const { data } = useProducts('')
+export const ProductCartList = () => {
+  const { data, status, error } = useProducts('')
 
   const headCells = useMemo(
     () => [
@@ -52,8 +53,21 @@ export const CartList = () => {
     [],
   )
 
+  if (status === 'pending') {
+    return null
+  }
+
+  if (status === 'error') {
+    return <p>Error: {error?.message}</p>
+  }
+
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '39%', mt: 1 }}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        maxHeight: `calc(40vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
+      }}
+    >
       <Table stickyHeader aria-label="cart table" sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
@@ -70,7 +84,7 @@ export const CartList = () => {
         <TableBody>
           {data?.pages.map(({ data }) =>
             data.map((product) => (
-              <CartItem key={product.id} cartItem={product} />
+              <ProductCartItem key={product.id} cartItem={product} />
             )),
           )}
         </TableBody>

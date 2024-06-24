@@ -1,6 +1,12 @@
-import { IconButton, TableCell, TableRow, Typography } from '@mui/material'
+import {
+  IconButton,
+  TableCell,
+  TableRow,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { IProduct } from 'modules/product/type'
-import { CartItemAmount } from './cart-item-amount'
+import { CartItemAmount } from 'modules/cart/cart-item-amount'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
 import { green, red } from '@mui/material/colors'
 
@@ -15,12 +21,12 @@ type Props = {
   cartItem: IProduct
 }
 
-export const CartItem = ({ cartItem }: Props) => {
+export const ProductCartItem = ({ cartItem }: Props) => {
   const { id, title } = cartItem
 
   return (
     <TableRow key={id}>
-      <TableCell component="th" scope="row" width="30%" sx={cellOverflowStyles}>
+      <TableCell component="th" scope="row" width="25%" sx={cellOverflowStyles}>
         <Typography component="span">{title}</Typography>
       </TableCell>
       <TableCell component="th" scope="row" width="20%" sx={cellOverflowStyles}>
@@ -30,7 +36,7 @@ export const CartItem = ({ cartItem }: Props) => {
         component="th"
         scope="row"
         align="center"
-        width="10%"
+        width="5%"
         sx={{ color: green[500] }}
       >
         <Typography>Yes</Typography>
@@ -39,12 +45,12 @@ export const CartItem = ({ cartItem }: Props) => {
         component="th"
         scope="row"
         align="center"
-        width="20%"
+        width="30%"
         sx={{ p: 0 }}
       >
         <CartItemAmount />
       </TableCell>
-      <TableCell component="th" scope="row" align="center" width="10%">
+      <TableCell component="th" scope="row" align="center" width="15%">
         <Typography>{`${id} UAH`}</Typography>
       </TableCell>
       <TableCell
@@ -52,26 +58,28 @@ export const CartItem = ({ cartItem }: Props) => {
         scope="row"
         align="center"
         sx={{ p: 0 }}
-        width="10%"
+        width="5%"
       >
-        <IconButton
-          aria-label="Add to cart"
-          onClick={(e) => {
-            e.stopPropagation()
-            console.log(`${title} -> successfully removed from cart`)
-          }}
-          sx={{
-            '&:hover': { backgroundColor: red[50] },
-            '&:hover svg': { color: red[700] },
-          }}
-        >
-          <RemoveShoppingCartIcon
-            sx={{
-              fontSize: '20px',
-              color: red[500],
+        <Tooltip title="Remove from cart" arrow placement="left">
+          <IconButton
+            aria-label="Remove from cart"
+            onClick={(e) => {
+              e.stopPropagation()
+              console.log(`${title} -> successfully removed from cart`)
             }}
-          />
-        </IconButton>
+            sx={{
+              '&:hover': { backgroundColor: red[100] },
+              '&:hover svg': { color: red[700] },
+            }}
+          >
+            <RemoveShoppingCartIcon
+              sx={{
+                fontSize: '20px',
+                color: red[500],
+              }}
+            />
+          </IconButton>
+        </Tooltip>
       </TableCell>
     </TableRow>
   )

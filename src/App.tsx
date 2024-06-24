@@ -12,6 +12,8 @@ import {
   HomePage,
   // BlogPage,
   NotFoundPage,
+  CartPage,
+  ProfilePage,
 } from 'app/pages'
 import { AppLayout } from 'layout/app-layout'
 // import { RequireAuth } from 'components/hoc/require-auth'
@@ -28,6 +30,8 @@ const router = createBrowserRouter(
           element={<ProductsPage />}
         />
         <Route path="product/:id" element={<ProductPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         {/* <Route
           path="posts/new"
           element={

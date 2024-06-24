@@ -12,8 +12,12 @@ import { CustomLink } from 'components/custom-link'
 import { Stack, useMediaQuery, useTheme } from '@mui/material'
 import { Navbar } from 'components/nav-bar'
 import { blue, grey } from '@mui/material/colors'
-import { CartNavItem } from 'components/cart'
+import { CartNavItem } from 'modules/cart'
 import PersonIcon from '@mui/icons-material/Person'
+
+export const MAIN_SPACING = '8px'
+export const HEADER_HEIGHT = '68px'
+export const FOOTER_HEIGHT = '68px'
 
 const settings = [
   {
@@ -25,11 +29,14 @@ const settings = [
     to: '/logout',
   },
 ]
+
 const logoStyles = {
   fontSize: 28,
   letterSpacing: '.2rem',
   color: blue[800],
   textDecoration: 'none',
+  fontWeight: 600,
+  textShadow: `1px 1px 1px ${blue[700]}`,
 }
 
 export const AppLayout = () => {
@@ -49,7 +56,7 @@ export const AppLayout = () => {
     <Stack sx={{ height: '100vh' }}>
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ height: '68px' }}>
+          <Toolbar disableGutters sx={{ height: HEADER_HEIGHT }}>
             {/* Mobile ------------------------------------------------ */}
             {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -100,7 +107,6 @@ export const AppLayout = () => {
             {/* Desktop ------------------------------------ */}
             <CustomLink
               to="/"
-              fontWeight={600}
               style={{
                 display: mdUpMatch ? 'flex' : 'none',
                 marginRight: '30px',
@@ -109,13 +115,16 @@ export const AppLayout = () => {
             >
               AGROPOLEX
             </CustomLink>
-            <Box sx={{ flexGrow: 1 }}>
-              <Navbar />
-            </Box>
+
+            <Navbar />
+
             {/* Settings ------------------------------------------ */}
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenSettings}>
+              <Tooltip title="Open settings" arrow placement="left">
+                <IconButton
+                  onClick={handleOpenSettings}
+                  sx={{ '&:hover': { backgroundColor: blue[50] } }}
+                >
                   <PersonIcon
                     color="primary"
                     sx={{
@@ -140,7 +149,11 @@ export const AppLayout = () => {
                 onClose={handleCloseSettings}
               >
                 {settings.map(({ title, to }) => (
-                  <MenuItem key={title} onClick={handleCloseSettings}>
+                  <MenuItem
+                    key={title}
+                    onClick={handleCloseSettings}
+                    sx={{ '&:hover': { backgroundColor: blue[50] } }}
+                  >
                     <CustomLink to={to}>{title}</CustomLink>
                   </MenuItem>
                 ))}
@@ -155,7 +168,7 @@ export const AppLayout = () => {
       <Container
         component="main"
         maxWidth="xl"
-        sx={{ height: '100%', overflow: 'hidden', py: 1 }}
+        sx={{ flexGrow: 1, py: MAIN_SPACING }}
       >
         <Outlet />
       </Container>
@@ -164,8 +177,8 @@ export const AppLayout = () => {
         component="footer"
         direction="row"
         alignItems="center"
-        height="68px"
         sx={{
+          minHeight: FOOTER_HEIGHT,
           borderTop: `1px solid ${grey[300]}`,
           backgroundColor: 'white',
         }}

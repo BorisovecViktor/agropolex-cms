@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
+
 // import { useParams } from 'react-router-dom'
 
 export const ProductList = () => {
@@ -79,12 +80,10 @@ export const ProductList = () => {
     return (
       <Box
         display="flex"
+        flexGrow={1}
         alignItems="center"
         justifyContent="center"
-        height="100%"
-        sx={{
-          color: grey[500],
-        }}
+        sx={{ color: grey[500] }}
       >
         <CircularProgress color="inherit" size={37} />
       </Box>
@@ -96,7 +95,7 @@ export const ProductList = () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '60%' }}>
+    <TableContainer component={Paper} sx={{ maxHeight: '60vh' }}>
       <Table stickyHeader aria-label="products table" sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>

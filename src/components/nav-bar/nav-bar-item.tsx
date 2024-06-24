@@ -3,6 +3,7 @@ import { NavBarSubItems } from './nav-bar-sub-items'
 import { ListItem } from '@mui/material'
 import { ICategory } from 'api/types/category'
 import { CustomLink } from 'components/custom-link'
+import { blue } from '@mui/material/colors'
 
 type Props = {
   item: ICategory
@@ -16,7 +17,7 @@ export const NavBarItem = ({ item }: Props) => {
     <ListItem
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
-      sx={{ width: 'auto' }}
+      sx={{ width: 'auto', '&:hover': { backgroundColor: blue[50] } }}
     >
       <CustomLink to={`/categories${path}`} fontWeight={600}>
         {name}

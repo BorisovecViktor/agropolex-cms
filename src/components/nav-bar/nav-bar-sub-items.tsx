@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { List, ListItem } from '@mui/material'
 import { ISubCategory } from 'api/types/category'
 import { CustomLink } from 'components/custom-link'
+import { blue } from '@mui/material/colors'
 
 type Props = {
   subItems: Array<ISubCategory>
@@ -25,7 +26,10 @@ export const NavBarSubItems = ({ subItems, onOpen }: Props) => (
       >
         {subItems.map(({ id, path, name }) => {
           return (
-            <ListItem key={id}>
+            <ListItem
+              key={id}
+              sx={{ '&:hover': { backgroundColor: blue[50] } }}
+            >
               <CustomLink
                 to={`/categories${path}`}
                 onClick={() => onOpen(false)}
