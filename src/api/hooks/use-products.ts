@@ -15,6 +15,7 @@ export const useProducts = (category: string) => {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.data.length ? allPages.length + 1 : undefined,
+    refetchOnMount: false,
     refetchOnWindowFocus: false,
   })
 

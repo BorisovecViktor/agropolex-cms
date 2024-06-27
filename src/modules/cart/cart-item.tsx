@@ -7,10 +7,11 @@ import {
   Typography,
 } from '@mui/material'
 import { IProduct } from 'modules/product/type'
-import { CartItemAmount } from 'modules/cart/cart-item-amount'
+import { CartItemAmount } from 'components/cart'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
 import { blue, red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { useState } from 'react'
 
 const cellOverflowStyles = {
   maxWidth: '800px',
@@ -25,6 +26,8 @@ type Props = {
 
 export const CartItem = ({ cartItem }: Props) => {
   const { id, title } = cartItem
+  const minAmount = 1
+  const [amount, setAmount] = useState<number>(minAmount)
 
   return (
     <TableRow key={id}>
@@ -38,7 +41,11 @@ export const CartItem = ({ cartItem }: Props) => {
         width="25%"
         sx={{ p: 0 }}
       >
-        <CartItemAmount />
+        <CartItemAmount
+          amount={amount}
+          onAmount={setAmount}
+          minAmount={minAmount}
+        />
       </TableCell>
       <TableCell component="th" scope="row" align="center" width="25%">
         <Typography>{`${id} UAH`}</Typography>
@@ -48,6 +55,7 @@ export const CartItem = ({ cartItem }: Props) => {
           <Tooltip title="Remove from cart" arrow placement="left">
             <IconButton
               aria-label="Remove from cart"
+              size="small"
               onClick={(e) => {
                 e.stopPropagation()
                 console.log(`${title} -> successfully removed from cart`)
@@ -59,7 +67,7 @@ export const CartItem = ({ cartItem }: Props) => {
             >
               <RemoveShoppingCartIcon
                 sx={{
-                  fontSize: '20px',
+                  fontSize: '18px',
                   color: red[500],
                 }}
               />
@@ -68,6 +76,7 @@ export const CartItem = ({ cartItem }: Props) => {
           <Tooltip title="Add to favorite" arrow placement="right">
             <IconButton
               aria-label="Add to favorite"
+              size="small"
               onClick={(e) => {
                 e.stopPropagation()
                 console.log(`${title} -> successfully add to favorite`)
@@ -79,7 +88,7 @@ export const CartItem = ({ cartItem }: Props) => {
             >
               <FavoriteIcon
                 sx={{
-                  fontSize: '20px',
+                  fontSize: '18px',
                   color: blue[500],
                 }}
               />

@@ -41,7 +41,7 @@ export const CartList = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="cart table" sx={{ minWidth: 650 }}>
+      <Table size="small" aria-label="cart table" sx={{ minWidth: 650 }}>
         <TableBody>
           {data?.pages.map(({ data }) =>
             data.map((product) => (

@@ -65,10 +65,15 @@ export const ProductCartList = () => {
     <TableContainer
       component={Paper}
       sx={{
-        maxHeight: `calc(40vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
+        height: `calc(50vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
       }}
     >
-      <Table stickyHeader aria-label="cart table" sx={{ minWidth: 650 }}>
+      <Table
+        stickyHeader
+        size="small"
+        aria-label="cart table"
+        sx={{ minWidth: 650 }}
+      >
         <TableHead>
           <TableRow>
             {headCells.map((headCell) => (

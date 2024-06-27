@@ -58,8 +58,8 @@ export const ProductList = () => {
         align: 'center',
       },
       {
-        id: 'balance',
-        label: 'Balance',
+        id: 'amount',
+        label: 'Amount',
         align: 'center',
       },
       {
@@ -95,8 +95,13 @@ export const ProductList = () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: '60vh' }}>
-      <Table stickyHeader aria-label="products table" sx={{ minWidth: 650 }}>
+    <TableContainer component={Paper} sx={{ height: '50vh' }}>
+      <Table
+        stickyHeader
+        size="small"
+        aria-label="products table"
+        sx={{ minWidth: 650, position: 'relative' }}
+      >
         <TableHead>
           <TableRow>
             {headCells.map((headCell) => (
@@ -125,24 +130,19 @@ export const ProductList = () => {
               return <ProductItem key={product.id} productItem={product} />
             }),
           )}
-          {isFetchingNextPage && (
-            <TableRow>
-              <TableCell
-                colSpan={6}
-                align="center"
-                sx={{
-                  p: 1,
-                  color: grey[500],
-                }}
-              >
-                <CircularProgress
-                  color="inherit"
-                  size={37}
-                  sx={{ verticalAlign: 'middle' }}
-                />
-              </TableCell>
-            </TableRow>
-          )}
+          <Box
+            component="tr"
+            sx={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: grey[100],
+              opacity: isFetchingNextPage ? 0.4 : 0,
+              zIndex: isFetchingNextPage ? 0 : -1,
+            }}
+          />
         </TableBody>
       </Table>
     </TableContainer>

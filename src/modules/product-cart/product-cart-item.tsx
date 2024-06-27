@@ -6,9 +6,10 @@ import {
   Typography,
 } from '@mui/material'
 import { IProduct } from 'modules/product/type'
-import { CartItemAmount } from 'modules/cart/cart-item-amount'
+import { CartItemAmount } from 'components/cart'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
 import { green, red } from '@mui/material/colors'
+import { useState } from 'react'
 
 const cellOverflowStyles = {
   maxWidth: '100px',
@@ -23,6 +24,8 @@ type Props = {
 
 export const ProductCartItem = ({ cartItem }: Props) => {
   const { id, title } = cartItem
+  const minAmount = 1
+  const [amount, setAmount] = useState<number>(minAmount)
 
   return (
     <TableRow key={id}>
@@ -48,7 +51,11 @@ export const ProductCartItem = ({ cartItem }: Props) => {
         width="30%"
         sx={{ p: 0 }}
       >
-        <CartItemAmount />
+        <CartItemAmount
+          amount={amount}
+          onAmount={setAmount}
+          minAmount={minAmount}
+        />
       </TableCell>
       <TableCell component="th" scope="row" align="center" width="15%">
         <Typography>{`${id} UAH`}</Typography>
@@ -63,6 +70,7 @@ export const ProductCartItem = ({ cartItem }: Props) => {
         <Tooltip title="Remove from cart" arrow placement="left">
           <IconButton
             aria-label="Remove from cart"
+            size="small"
             onClick={(e) => {
               e.stopPropagation()
               console.log(`${title} -> successfully removed from cart`)
@@ -74,7 +82,7 @@ export const ProductCartItem = ({ cartItem }: Props) => {
           >
             <RemoveShoppingCartIcon
               sx={{
-                fontSize: '20px',
+                fontSize: '18px',
                 color: red[500],
               }}
             />

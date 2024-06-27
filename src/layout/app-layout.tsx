@@ -12,7 +12,7 @@ import { CustomLink } from 'components/custom-link'
 import { Stack, useMediaQuery, useTheme } from '@mui/material'
 import { Navbar } from 'components/nav-bar'
 import { blue, grey } from '@mui/material/colors'
-import { CartNavItem } from 'modules/cart'
+import { CartNavItem } from 'components/cart'
 import PersonIcon from '@mui/icons-material/Person'
 
 export const MAIN_SPACING = '8px'
