@@ -1,5 +1,5 @@
 import { Badge, IconButton, Tooltip } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { blue } from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +23,7 @@ export const CartNavItem = () => {
           onClick={() => navigate('/cart')}
           sx={{ '&:hover': { backgroundColor: blue[50] } }}
         >
-          <ShoppingCartIcon color="primary" sx={{ fontSize: '25px' }} />
+          <ShoppingCartOutlinedIcon color="primary" sx={{ fontSize: '25px' }} />
         </IconButton>
       </Tooltip>
     </Badge>

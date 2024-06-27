@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 import { IProduct } from 'modules/product/type'
 import { CartItemAmount } from 'components/cart'
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
+import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
 import { green, red } from '@mui/material/colors'
 import { useState } from 'react'
 
@@ -80,7 +80,7 @@ export const ProductCartItem = ({ cartItem }: Props) => {
               '&:hover svg': { color: red[700] },
             }}
           >
-            <RemoveShoppingCartIcon
+            <RemoveShoppingCartOutlinedIcon
               sx={{
                 fontSize: '18px',
                 color: red[500],

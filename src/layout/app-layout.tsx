@@ -13,7 +13,7 @@ import { Stack, useMediaQuery, useTheme } from '@mui/material'
 import { Navbar } from 'components/nav-bar'
 import { blue, grey } from '@mui/material/colors'
 import { CartNavItem } from 'components/cart'
-import PersonIcon from '@mui/icons-material/Person'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 
 export const MAIN_SPACING = '8px'
 export const HEADER_HEIGHT = '68px'
@@ -125,11 +125,9 @@ export const AppLayout = () => {
                   onClick={handleOpenSettings}
                   sx={{ '&:hover': { backgroundColor: blue[50] } }}
                 >
-                  <PersonIcon
+                  <PersonOutlineOutlinedIcon
                     color="primary"
-                    sx={{
-                      fontSize: '25px',
-                    }}
+                    sx={{ fontSize: '25px' }}
                   />
                 </IconButton>
               </Tooltip>

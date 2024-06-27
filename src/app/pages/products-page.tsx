@@ -1,10 +1,6 @@
 import { Stack } from '@mui/material'
 import { ProductCartList } from 'modules/product-cart'
-import {
-  ProductAdvertising,
-  ProductFilters,
-  ProductList,
-} from 'modules/product'
+import { ProductFilters, ProductList } from 'modules/product'
 import { MAIN_SPACING } from 'layout/app-layout'
 
 export const ProductsPage = () => (
@@ -14,6 +10,5 @@ export const ProductsPage = () => (
       <ProductList />
       <ProductCartList />
     </Stack>
-    <ProductAdvertising />
   </Stack>
 )

@@ -15,6 +15,7 @@ import {
 import { useProducts } from 'api/hooks/use-products'
 import { CartItem } from './cart-item'
 import { grey } from '@mui/material/colors'
+import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 
 export const CartList = () => {
   const { data, status, error } = useProducts('')
@@ -40,7 +41,12 @@ export const CartList = () => {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (2 * ${MAIN_SPACING}))`,
+      }}
+    >
       <Table size="small" aria-label="cart table" sx={{ minWidth: 650 }}>
         <TableBody>
           {data?.pages.map(({ data }) =>

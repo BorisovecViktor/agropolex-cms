@@ -19,7 +19,7 @@ const h1 = {
 } as const
 const body1 = {
   fontSize: 14,
-}
+} as const
 
 export const typography = {
   fontFamily: ['Inter', 'Arial', 'sans-serif'].join(','),
