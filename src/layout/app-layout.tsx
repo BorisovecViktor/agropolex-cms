@@ -14,6 +14,8 @@ import { Navbar } from 'components/nav-bar'
 import { blue, grey } from '@mui/material/colors'
 import { CartNavItem } from 'components/cart'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import { ErrorBoundary } from 'react-error-boundary'
+import { RuntimeErrorDialog } from 'lib/runtime-error-dialog'
 
 export const MAIN_SPACING = '8px'
 export const HEADER_HEIGHT = '68px'
@@ -168,7 +170,9 @@ export const AppLayout = () => {
         maxWidth="xl"
         sx={{ flexGrow: 1, py: MAIN_SPACING }}
       >
-        <Outlet />
+        <ErrorBoundary FallbackComponent={RuntimeErrorDialog}>
+          <Outlet />
+        </ErrorBoundary>
       </Container>
 
       <Stack

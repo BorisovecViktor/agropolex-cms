@@ -39,8 +39,16 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& fieldset': {
-            borderColor: grey[400],
+            border: `1px solid ${grey[400]}`,
             boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
+          },
+          '& .MuiOutlinedInput-root': {
+            '&:hover fieldset': {
+              border: `1px solid ${grey[400]}`,
+            },
+            '&.Mui-focused fieldset': {
+              border: `1px solid ${grey[400]}`,
+            },
           },
         },
       },
