@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -16,6 +16,7 @@ import { CartNavItem } from 'components/cart'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import { ErrorBoundary } from 'react-error-boundary'
 import { RuntimeErrorDialog } from 'lib/runtime-error-dialog'
+import globalRouter from 'global-router'
 
 export const MAIN_SPACING = '8px'
 export const HEADER_HEIGHT = '68px'
@@ -45,6 +46,9 @@ export const AppLayout = () => {
   const theme = useTheme()
   const mdUpMatch = useMediaQuery(theme.breakpoints.up('md'))
   const [anchorSettings, setAnchorSettings] = useState<null | HTMLElement>(null)
+  const navigate = useNavigate()
+
+  globalRouter.navigate = navigate
 
   const handleOpenSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorSettings(event.currentTarget)

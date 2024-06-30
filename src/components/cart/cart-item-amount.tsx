@@ -2,11 +2,11 @@ import { IconButton, Stack, TextField } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import { grey } from '@mui/material/colors'
-import { ChangeEvent, memo } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, memo } from 'react'
 
 type Props = {
   amount: number
-  onAmount: (amount: number) => void
+  onAmount: Dispatch<SetStateAction<number>>
   minAmount: number
   buttonColor?: string
 }
@@ -22,17 +22,17 @@ export const CartItemAmount = memo(
       color: grey[500],
     }
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChangeAmount = (e: ChangeEvent<HTMLInputElement>) => {
       if (Number(e.target.value) >= minAmount) {
         onAmount(Math.max(Number(e.target.value), minAmount))
       }
     }
 
-    const handleAddItem = () => {
+    const handleIncreaseAmount = () => {
       onAmount(amount + 1)
     }
 
-    const handleRemoveItem = () => {
+    const handleDecreaseAmount = () => {
       onAmount(amount - 1)
     }
 
@@ -40,19 +40,24 @@ export const CartItemAmount = memo(
       <Stack
         direction="row"
         onClick={(e) => e.stopPropagation()}
-        sx={{ display: 'inline-flex', alignItems: 'center' }}
+        sx={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          height: '33px',
+          px: 2,
+        }}
       >
         <IconButton
           aria-label="Remove from cart"
           size="small"
-          onClick={handleRemoveItem}
+          onClick={handleDecreaseAmount}
           sx={{ ...buttonStyles, mr: 1 }}
           disabled={amount === minAmount}
         >
           <RemoveIcon sx={iconStyles} />
         </IconButton>
         <TextField
-          onChange={handleChange}
+          onChange={handleChangeAmount}
           value={amount}
           inputProps={{ style: { padding: '4px', textAlign: 'center' } }}
           sx={{ width: '70px' }}
@@ -60,7 +65,7 @@ export const CartItemAmount = memo(
         <IconButton
           aria-label="Add to cart"
           size="small"
-          onClick={handleAddItem}
+          onClick={handleIncreaseAmount}
           sx={{ ...buttonStyles, ml: 1 }}
           disabled={amount === 10000}
         >

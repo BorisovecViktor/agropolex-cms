@@ -73,6 +73,7 @@ export const Carousel = ({ withDescription }: Props) => {
     >
       {images.map((image) => (
         <Stack
+          key={image.id}
           spacing={2}
           style={{
             WebkitTouchCallout: 'none',

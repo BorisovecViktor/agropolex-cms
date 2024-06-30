@@ -1,4 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { toastError } from 'components/toaster'
+import globalRouter from 'global-router'
 import { IUser } from 'lib/hooks/use-auth'
 
 export const API_URL = process.env.REACT_APP_API_URL
@@ -38,11 +40,16 @@ export const $api = axios.create({
 // )
 
 $api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const status = error.response ? error.response.status : null
+    const originalRequest: any = error.config
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (status === 404 && globalRouter.navigate) {
+      globalRouter.navigate('/not-found')
+    }
+
+    if (status === 401 && !originalRequest._retry && globalRouter.navigate) {
       originalRequest._retry = true
 
       try {
@@ -76,12 +83,19 @@ $api.interceptors.response.use(
           }
         }
       } catch (refreshError) {
+        toastError(error.message)
         console.error('Token refresh failed:', refreshError)
         localStorage.removeItem(USER_KEY)
-        window.location.href = '/login'
+        globalRouter.navigate('/login')
 
         return Promise.reject(refreshError)
       }
+    }
+
+    if (status === 500) {
+      toastError(error.message)
+
+      return Promise.reject(error.response)
     }
 
     return Promise.reject(error)

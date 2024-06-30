@@ -12,7 +12,7 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 import { blue, green, orange } from '@mui/material/colors'
 import { useNavigate } from 'react-router-dom'
 import { CartItemAmount } from 'components/cart'
-import { useCallback, useState } from 'react'
+import { memo, useState } from 'react'
 import { useBoolean } from 'lib/hooks/use-boolean'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { Carousel } from 'components/carousel'
@@ -31,215 +31,217 @@ type Props = {
   innerRef?: (instance: HTMLTableRowElement) => void
 }
 
-export const ProductItem = ({ productItem, innerRef, ...props }: Props) => {
-  const navigate = useNavigate()
-  const { id, title } = productItem
-  const minAmount = 0
-  const minPurchaseAmount = 1
-  const [amount, setAmount] = useState<number>(minAmount)
-  const openImageGallery = useBoolean(false)
-  const openInfo = useBoolean(false)
+export const ProductItem = memo(
+  ({ productItem, innerRef, ...props }: Props) => {
+    const navigate = useNavigate()
+    const { id, title } = productItem
+    const minAmount = 0
+    const minPurchaseAmount = 1
+    const [amount, setAmount] = useState<number>(minAmount)
+    const openImageGallery = useBoolean(false)
+    const openInfo = useBoolean(false)
 
-  const handleAmount = useCallback((amount: number) => {
-    setAmount(amount)
-  }, [])
-
-  return (
-    <>
-      <CustomDialog
-        title={productItem.title}
-        isOpen={openImageGallery.isTrue}
-        onClose={openImageGallery.setFalse}
-        aria="Image gallery"
-      >
-        <Carousel withDescription />
-      </CustomDialog>
-      <CustomDialog
-        title={productItem.title}
-        isOpen={openInfo.isTrue}
-        onClose={openInfo.setFalse}
-        aria="Info"
-      >
-        <DialogContentText>
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running Let Google help
-          apps determine location. Let Google help apps determine location. This
-          means sending anonymous location data to Google, even when no apps are
-          running Let Google help apps determine location. Let Google help apps
-          determine location. This means sending anonymous location data to
-          Google, even when no apps are running Let Google help apps determine
-          location. Let Google help apps determine location. This means sending
-          anonymous location data to Google, even when no apps are running Let
-          Google help apps determine location. Let Google help apps determine
-          location. This means sending anonymous location data to Google, even
-          when no apps are running Let Google help apps determine location. Let
-          Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running Let Google help
-          apps determine location. Let Google help apps determine location. This
-          means sending anonymous location data to Google, even when no apps are
-          running Let Google help apps determine location. Let Google help apps
-          determine location. This means sending anonymous location data to
-          Google, even when no apps are running Let Google help apps determine
-          location. Let Google help apps determine location. This means sending
-          anonymous location data to Google, even when no apps are running Let
-          Google help apps determine location. Let Google help apps determine
-          location. This means sending anonymous location data to Google, even
-          when no apps are running Let Google help apps determine location. Let
-          Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running Let Google help
-          apps determine location. Let Google help apps determine location. This
-          means sending anonymous location data to Google, even when no apps are
-          running Let Google help apps determine location. Let Google help apps
-          determine location. This means sending anonymous location data to
-          Google, even when no apps are running Let Google help apps determine
-          location. Let Google help apps determine location. This means sending
-          anonymous location data to Google, even when no apps are running Let
-          Google help apps determine location.
-        </DialogContentText>
-      </CustomDialog>
-      <TableRow
-        key={id}
-        ref={innerRef}
-        onClick={() => navigate(`/products/${id}`)}
-        sx={{
-          cursor: 'pointer',
-          WebkitTouchCallout: 'none',
-          WebkitUserSelect: 'none',
-          KhtmlUserSelect: 'none',
-          MozUserSelect: 'none',
-          msUserSelect: 'none',
-          userSelect: 'none',
-          '&:hover': { backgroundColor: blue[50] },
-        }}
-        {...props}
-      >
-        <TableCell
-          component="th"
-          scope="row"
-          width="25%"
-          sx={cellOverflowStyles}
+    return (
+      <>
+        <CustomDialog
+          title={productItem.title}
+          isOpen={openImageGallery.isTrue}
+          onClose={openImageGallery.setFalse}
+          aria="Image gallery"
         >
-          <Typography component="span">{title}</Typography>
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          width="20%"
-          sx={cellOverflowStyles}
+          <Carousel withDescription />
+        </CustomDialog>
+        <CustomDialog
+          title={productItem.title}
+          isOpen={openInfo.isTrue}
+          onClose={openInfo.setFalse}
+          aria="Info"
         >
-          <Typography component="span">{`${title} ${id}`}</Typography>
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          width="5%"
-          sx={{ color: green[500] }}
+          <DialogContentText>
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running Let
+            Google help apps determine location. Let Google help apps determine
+            location. This means sending anonymous location data to Google, even
+            when no apps are running Let Google help apps determine location.
+          </DialogContentText>
+        </CustomDialog>
+        <TableRow
+          key={id}
+          ref={innerRef}
+          onClick={() => navigate(`/products/${id}`)}
+          sx={{
+            cursor: 'pointer',
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none',
+            KhtmlUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            userSelect: 'none',
+            '&:hover': { backgroundColor: blue[50] },
+          }}
+          {...props}
         >
-          <Typography>Yes</Typography>
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          width="30%"
-          sx={{ p: 0 }}
-        >
-          <CartItemAmount
-            amount={amount}
-            onAmount={handleAmount}
-            minAmount={minAmount}
-            buttonColor={blue[200]}
-          />
-        </TableCell>
-        <TableCell component="th" scope="row" align="center" width="15%">
-          <Typography>{`${id} UAH`}</Typography>
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{ p: 0 }}
-          width="5%"
-        >
-          <Stack direction="row">
-            <Tooltip
-              title={
-                amount < minPurchaseAmount
-                  ? 'Add at least one item'
-                  : 'Add to cart'
-              }
-              arrow
-              placement="left"
-            >
-              <Typography component="span" onClick={(e) => e.stopPropagation()}>
+          <TableCell
+            component="th"
+            scope="row"
+            width="25%"
+            sx={cellOverflowStyles}
+          >
+            <Typography component="span">{title}</Typography>
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            width="20%"
+            sx={cellOverflowStyles}
+          >
+            <Typography component="span">{`${title} ${id}`}</Typography>
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            width="5%"
+            sx={{ color: green[500] }}
+          >
+            <Typography>Yes</Typography>
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            width="30%"
+            sx={{ p: 0 }}
+          >
+            <CartItemAmount
+              amount={amount}
+              onAmount={setAmount}
+              minAmount={minAmount}
+              buttonColor={blue[200]}
+            />
+          </TableCell>
+          <TableCell component="th" scope="row" align="center" width="15%">
+            <Typography>{`${id} UAH`}</Typography>
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{ p: 0 }}
+            width="5%"
+          >
+            <Stack direction="row">
+              <Tooltip
+                title={
+                  amount < minPurchaseAmount
+                    ? 'Add at least one item'
+                    : 'Add to cart'
+                }
+                arrow
+                placement="left"
+              >
+                <Typography
+                  component="span"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <IconButton
+                    aria-label="Add to cart"
+                    size="small"
+                    onClick={() =>
+                      console.log(`${title} -> successfully added to cart`)
+                    }
+                    disabled={amount < minPurchaseAmount}
+                    sx={{
+                      '&:hover': { backgroundColor: green[100] },
+                      '&:hover svg': { color: green[700] },
+                      '&:disabled svg': { color: green[200] },
+                    }}
+                  >
+                    <AddShoppingCartOutlinedIcon
+                      sx={{
+                        fontSize: '18px',
+                        color: green[500],
+                      }}
+                    />
+                  </IconButton>
+                </Typography>
+              </Tooltip>
+              <Tooltip title="Image gallery" arrow>
                 <IconButton
-                  aria-label="Add to cart"
+                  aria-label="Image gallery"
                   size="small"
-                  onClick={() =>
-                    console.log(`${title} -> successfully added to cart`)
-                  }
-                  disabled={amount < minPurchaseAmount}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    openImageGallery.setTrue()
+                  }}
                   sx={{
-                    '&:hover': { backgroundColor: green[100] },
-                    '&:hover svg': { color: green[700] },
-                    '&:disabled svg': { color: green[200] },
+                    '&:hover': { backgroundColor: orange[100] },
+                    '&:hover svg': { color: orange[700] },
                   }}
                 >
-                  <AddShoppingCartOutlinedIcon
+                  <PhotoLibraryOutlinedIcon
                     sx={{
                       fontSize: '18px',
-                      color: green[500],
+                      color: orange[500],
                     }}
                   />
                 </IconButton>
-              </Typography>
-            </Tooltip>
-            <Tooltip title="Image gallery" arrow>
-              <IconButton
-                aria-label="Image gallery"
-                size="small"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  openImageGallery.setTrue()
-                }}
-                sx={{
-                  '&:hover': { backgroundColor: orange[100] },
-                  '&:hover svg': { color: orange[700] },
-                }}
-              >
-                <PhotoLibraryOutlinedIcon
-                  sx={{
-                    fontSize: '18px',
-                    color: orange[500],
+              </Tooltip>
+              <Tooltip title="Info" arrow>
+                <IconButton
+                  aria-label="Info"
+                  size="small"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    openInfo.setTrue()
                   }}
-                />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Info" arrow>
-              <IconButton
-                aria-label="Info"
-                size="small"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  openInfo.setTrue()
-                }}
-                sx={{
-                  '&:hover': { backgroundColor: blue[100] },
-                  '&:hover svg': { color: blue[700] },
-                }}
-              >
-                <InfoOutlinedIcon
                   sx={{
-                    fontSize: '18px',
-                    color: blue[500],
+                    '&:hover': { backgroundColor: blue[100] },
+                    '&:hover svg': { color: blue[700] },
                   }}
-                />
-              </IconButton>
-            </Tooltip>
-          </Stack>
-        </TableCell>
-      </TableRow>
-    </>
-  )
-}
+                >
+                  <InfoOutlinedIcon
+                    sx={{
+                      fontSize: '18px',
+                      color: blue[500],
+                    }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          </TableCell>
+        </TableRow>
+      </>
+    )
+  },
+)

@@ -17,6 +17,7 @@ export const useProducts = (category: string) => {
       lastPage.data.length ? allPages.length + 1 : undefined,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    retry: 0,
   })
 
   return { data, status, error, fetchNextPage, isFetchingNextPage, hasNextPage }

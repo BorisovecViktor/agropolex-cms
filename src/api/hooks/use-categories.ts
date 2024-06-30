@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import { categoryService } from 'api/services'
 
 export const useCategories = (isEnabled: boolean) => {
@@ -10,17 +9,8 @@ export const useCategories = (isEnabled: boolean) => {
     enabled: isEnabled,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    retry: 0,
   })
-
-  useEffect(() => {
-    if (isSuccess) {
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-    }
-  }, [isError])
 
   return { data, isLoading, isSuccess, isError }
 }
