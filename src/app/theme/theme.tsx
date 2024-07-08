@@ -75,6 +75,12 @@ const theme = createTheme({
     MuiTableRow: {
       styleOverrides: {
         root: {
+          WebkitTouchCallout: 'none',
+          WebkitUserSelect: 'none',
+          KhtmlUserSelect: 'none',
+          MozUserSelect: 'none',
+          msUserSelect: 'none',
+          userSelect: 'none',
           '&:last-child td, &:last-child th': { border: 0 },
           '&:nth-of-type(even)': {
             backgroundColor: grey[50],

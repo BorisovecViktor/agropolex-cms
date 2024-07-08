@@ -99,26 +99,19 @@ export const ProductItem = memo(
           key={id}
           ref={innerRef}
           onClick={() => navigate(`/products/${id}`)}
-          sx={{
-            cursor: 'pointer',
-            WebkitTouchCallout: 'none',
-            WebkitUserSelect: 'none',
-            KhtmlUserSelect: 'none',
-            MozUserSelect: 'none',
-            msUserSelect: 'none',
-            userSelect: 'none',
-            '&:hover': { backgroundColor: blue[50] },
-          }}
+          sx={{ cursor: 'pointer', '&:hover': { backgroundColor: blue[50] } }}
           {...props}
         >
-          <TableCell
-            component="th"
-            scope="row"
-            width="25%"
-            sx={cellOverflowStyles}
-          >
-            <Typography component="span">{title}</Typography>
-          </TableCell>
+          <Tooltip title={title} arrow placement="bottom">
+            <TableCell
+              component="th"
+              scope="row"
+              width="25%"
+              sx={cellOverflowStyles}
+            >
+              <Typography component="span">{title}</Typography>
+            </TableCell>
+          </Tooltip>
           <TableCell
             component="th"
             scope="row"

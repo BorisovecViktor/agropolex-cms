@@ -95,7 +95,10 @@ export const ProductList = () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ height: '50vh' }}>
+    <TableContainer
+      component={Paper}
+      sx={{ height: '50vh', minHeight: '10vh', resize: 'vertical' }}
+    >
       <Table
         stickyHeader
         size="small"

@@ -66,6 +66,8 @@ export const ProductCartList = () => {
       component={Paper}
       sx={{
         height: `calc(50vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
+        minHeight: '10vh',
+        resize: 'vertical',
       }}
     >
       <Table
