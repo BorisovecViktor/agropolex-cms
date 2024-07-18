@@ -91,6 +91,7 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
+          borderBottom: 'none',
           '&.MuiTableCell-head': {
             backgroundColor: grey[400],
           },

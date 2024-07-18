@@ -11,7 +11,6 @@ import { CartItemAmount } from 'components/cart'
 import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
 import { blue, red } from '@mui/material/colors'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
-import { useState } from 'react'
 
 const cellOverflowStyles = {
   maxWidth: '800px',
@@ -26,8 +25,6 @@ type Props = {
 
 export const CartItem = ({ cartItem }: Props) => {
   const { id, title } = cartItem
-  const minAmount = 1
-  const [amount, setAmount] = useState<number>(minAmount)
 
   return (
     <TableRow key={id}>
@@ -41,11 +38,7 @@ export const CartItem = ({ cartItem }: Props) => {
         width="25%"
         sx={{ p: 0 }}
       >
-        <CartItemAmount
-          amount={amount}
-          onAmount={setAmount}
-          minAmount={minAmount}
-        />
+        <CartItemAmount />
       </TableCell>
       <TableCell component="th" scope="row" align="center" width="25%">
         <Typography>{`${id} UAH`}</Typography>

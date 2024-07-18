@@ -2,14 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { productService } from 'api/services'
 
 export const useProducts = (category: string) => {
-  const {
-    data,
-    status,
-    error,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
+  const { data, status, error, fetchNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['products'],
     queryFn: ({ pageParam }) => productService.getProduct(category, pageParam),
     initialPageParam: 1,
@@ -20,7 +13,13 @@ export const useProducts = (category: string) => {
     retry: 0,
   })
 
-  return { data, status, error, fetchNextPage, isFetchingNextPage, hasNextPage }
+  return {
+    data,
+    status,
+    error,
+    fetchNextPage,
+    isFetching,
+  }
 }
 
 // export const useProduct = (id: string) => {
