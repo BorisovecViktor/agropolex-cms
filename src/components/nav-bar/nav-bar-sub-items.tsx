@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
 import { List, ListItem } from '@mui/material'
-import { ISubCategory } from 'api/types/category'
 import { CustomLink } from 'components/custom-link'
 import { blue } from '@mui/material/colors'
+import { ISubCategory } from 'api/types/category'
 
 type Props = {
   subItems: Array<ISubCategory>

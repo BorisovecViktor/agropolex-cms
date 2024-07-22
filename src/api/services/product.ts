@@ -2,7 +2,7 @@ import {
   $api,
   // API_URL
 } from 'api/http'
-import { IProduct } from 'modules/product/type'
+import { IProduct } from 'api/types/product'
 
 class ProductService {
   // getProduct(id: string) {

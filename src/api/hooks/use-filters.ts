@@ -13,7 +13,7 @@ export const useFilters = () => {
         return filterService.getFilters(params)
       }
     },
-    select: (data) => data?.data,
+    select: (data) => data?.data.data,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     retry: 0,

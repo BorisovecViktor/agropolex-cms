@@ -1,9 +1,9 @@
-import { IFilter } from 'api/types/filter'
 import { $api, API_URL } from 'api/http'
+import { IFilterData } from 'api/types/filter'
 
 class FilterService {
   getFilters(id: string) {
-    return $api.get<Array<IFilter>>(`${API_URL}/filters/${id}`)
+    return $api.get<IFilterData>(`${API_URL}/filters/${id}`)
   }
 }
 

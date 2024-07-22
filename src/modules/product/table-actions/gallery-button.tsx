@@ -5,7 +5,7 @@ import { useBoolean } from 'lib/hooks/use-boolean'
 import { Row } from '@tanstack/react-table'
 import { CustomDialog } from 'components/custom-dialog'
 import { Carousel } from 'components/carousel'
-import { IProduct } from '../type'
+import { IProduct } from 'api/types/product'
 
 type Props = {
   row: Row<IProduct>

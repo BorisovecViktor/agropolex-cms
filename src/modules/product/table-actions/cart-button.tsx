@@ -1,8 +1,8 @@
 import { IconButton, Tooltip } from '@mui/material'
 import { Row } from '@tanstack/react-table'
-import { IProduct } from '../type'
 import { green } from '@mui/material/colors'
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined'
+import { IProduct } from 'api/types/product'
 
 type Props = {
   row: Row<IProduct>

@@ -98,13 +98,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '10px',
+          paddingRight: '10px',
+        },
+      },
+    },
     MuiAccordionDetails: {
       styleOverrides: {
         root: {
           maxHeight: '300px',
-          paddingTop: '1px',
-          paddingBottom: '1px',
-          overflowY: 'scroll',
+          padding: '0 10px',
+          overflow: 'auto',
         },
       },
     },

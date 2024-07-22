@@ -1,14 +1,18 @@
 import { Stack } from '@mui/material'
-// import { ProductCartList } from 'modules/product-cart'
+import { ProductCartList } from 'modules/product-cart'
 import { ProductFilters, ProductList } from 'modules/product'
 import { MAIN_SPACING } from 'layout/app-layout'
 
 export const ProductsPage = () => (
   <Stack direction="row" height="100%" spacing={1}>
     <ProductFilters />
-    <Stack flexGrow={1} width="60%" spacing={MAIN_SPACING}>
+    <Stack
+      flexGrow={1}
+      width={`calc(80% - ${MAIN_SPACING})`}
+      spacing={MAIN_SPACING}
+    >
       <ProductList />
-      {/* <ProductCartList /> */}
+      <ProductCartList />
     </Stack>
   </Stack>
 )

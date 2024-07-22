@@ -1,87 +1,41 @@
-import {
-  IconButton,
-  TableCell,
-  TableRow,
-  Tooltip,
-  Typography,
-} from '@mui/material'
-import { IProduct } from 'modules/product/type'
-import { CartItemAmount } from 'components/cart'
-import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
-import { green, red } from '@mui/material/colors'
-
-const cellOverflowStyles = {
-  maxWidth: '100px',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-}
+import { memo } from 'react'
+import { TableCell, TableRow } from '@mui/material'
+import { IProduct } from 'api/types/product'
+import { flexRender, Row } from '@tanstack/react-table'
+import { VirtualItem, Virtualizer } from '@tanstack/react-virtual'
 
 type Props = {
-  cartItem: IProduct
+  row: Row<IProduct>
+  virtualRow: VirtualItem<Element>
+  rowVirtualizer: Virtualizer<HTMLDivElement, Element>
 }
 
-export const ProductCartItem = ({ cartItem }: Props) => {
-  const { id, title } = cartItem
-
-  return (
-    <TableRow key={id}>
-      <TableCell component="th" scope="row" width="25%" sx={cellOverflowStyles}>
-        <Typography component="span">{title}</Typography>
-      </TableCell>
-      <TableCell component="th" scope="row" width="20%" sx={cellOverflowStyles}>
-        <Typography component="span">{`${title} ${id}`}</Typography>
-      </TableCell>
-      <TableCell
-        component="th"
-        scope="row"
-        align="center"
-        width="5%"
-        sx={{ color: green[500] }}
-      >
-        <Typography>Yes</Typography>
-      </TableCell>
-      <TableCell
-        component="th"
-        scope="row"
-        align="center"
-        width="30%"
-        sx={{ p: 0 }}
-      >
-        <CartItemAmount />
-      </TableCell>
-      <TableCell component="th" scope="row" align="center" width="15%">
-        <Typography>{`${id} UAH`}</Typography>
-      </TableCell>
-      <TableCell
-        component="th"
-        scope="row"
-        align="center"
-        sx={{ p: 0 }}
-        width="5%"
-      >
-        <Tooltip title="Remove from cart" arrow placement="left">
-          <IconButton
-            aria-label="Remove from cart"
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation()
-              console.log(`${title} -> successfully removed from cart`)
-            }}
-            sx={{
-              '&:hover': { backgroundColor: red[100] },
-              '&:hover svg': { color: red[700] },
-            }}
-          >
-            <RemoveShoppingCartOutlinedIcon
-              sx={{
-                fontSize: '18px',
-                color: red[500],
-              }}
-            />
-          </IconButton>
-        </Tooltip>
-      </TableCell>
+export const ProductCartItem = memo(
+  ({ row, virtualRow, rowVirtualizer }: Props) => (
+    <TableRow
+      data-index={virtualRow.index}
+      ref={(node) => rowVirtualizer.measureElement(node)}
+      sx={{
+        display: 'flex',
+        position: 'absolute',
+        transform: `translateY(${virtualRow.start}px)`,
+        width: '100%',
+      }}
+    >
+      {row.getVisibleCells().map((cell) => (
+        <TableCell
+          key={cell.id}
+          component="th"
+          scope="row"
+          sx={{
+            flexGrow: cell.column.getSize() === 150 ? 1 : 0,
+            width: cell.column.getSize(),
+            ...cell.column.columnDef.meta,
+          }}
+        >
+          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        </TableCell>
+      ))}
     </TableRow>
-  )
-}
+  ),
+)

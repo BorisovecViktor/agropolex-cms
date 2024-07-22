@@ -1,5 +1,5 @@
-import { ICategory } from 'api/types/category'
 import { $api, API_URL } from 'api/http'
+import { ICategory } from 'api/types/category'
 
 class CategoryService {
   getCategories() {

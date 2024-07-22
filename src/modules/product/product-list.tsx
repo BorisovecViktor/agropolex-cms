@@ -24,7 +24,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { IProduct } from './type'
+import { IProduct } from 'api/types/product'
 import { CartItemAmount } from 'components/cart'
 import { CartButton, GalleryButton, InfoButton } from './table-actions'
 
@@ -42,7 +42,7 @@ export const ProductList = () => {
     () => data?.pages?.flatMap((page) => page.data) ?? [],
     [data],
   )
-  const totalDBRowCount = data?.pages?.[0]?.headers['x-total-count'] ?? 0
+  const totalDBRowCount = data?.pages?.[0].headers['x-total-count']
   const totalFetched = flatData.length
   const columns = useMemo<ColumnDef<IProduct>[]>(
     () => [
@@ -110,7 +110,12 @@ export const ProductList = () => {
           <Stack
             direction="row"
             onClick={(e) => e.stopPropagation()}
-            sx={{ alignItems: 'center', height: '33px', px: 2 }}
+            sx={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '33px',
+              px: 2,
+            }}
           >
             <CartButton row={info.row} />
             <GalleryButton row={info.row} />

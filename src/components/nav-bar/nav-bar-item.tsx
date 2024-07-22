@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { NavBarSubItems } from './nav-bar-sub-items'
 import { ListItem } from '@mui/material'
-import { ICategory } from 'api/types/category'
 import { CustomLink } from 'components/custom-link'
 import { blue } from '@mui/material/colors'
+import { ICategory } from 'api/types/category'
 
 type Props = {
   item: ICategory

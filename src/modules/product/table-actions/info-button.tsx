@@ -4,7 +4,7 @@ import { blue } from '@mui/material/colors'
 import { useBoolean } from 'lib/hooks/use-boolean'
 import { CustomDialog } from 'components/custom-dialog'
 import { Row } from '@tanstack/react-table'
-import { IProduct } from '../type'
+import { IProduct } from 'api/types/product'
 
 type Props = {
   row: Row<IProduct>
