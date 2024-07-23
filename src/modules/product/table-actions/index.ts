@@ -1,3 +1,3 @@
-export * from './cart-button'
-export * from './info-button'
-export * from './gallery-button'
+export * from './cart-action'
+export * from './info-action'
+export * from './gallery-action'

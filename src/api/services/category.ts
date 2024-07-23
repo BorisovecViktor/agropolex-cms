@@ -1,9 +1,9 @@
-import { $api, API_URL } from 'api/http'
+import { $api } from 'api/http'
 import { ICategory } from 'api/types/category'
 
 class CategoryService {
   getCategories() {
-    return $api.get<Array<ICategory>>(`${API_URL}/categories`)
+    return $api.get<Array<ICategory>>('/categories')
   }
 
   // createPost(newPost: Omit<ICategory, 'id'>) {

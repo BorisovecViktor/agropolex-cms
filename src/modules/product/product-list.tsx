@@ -6,7 +6,6 @@ import {
   Stack,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
@@ -18,7 +17,6 @@ import { ProductItem } from './product-item'
 import { useProducts } from 'api/hooks/use-products'
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   Row,
   useReactTable,
@@ -26,7 +24,8 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { IProduct } from 'api/types/product'
 import { CartItemAmount } from 'components/cart'
-import { CartButton, GalleryButton, InfoButton } from './table-actions'
+import { CartAction, GalleryAction, InfoAction } from './table-actions'
+import { VirtualTableHeadCell } from 'components/virtual-table-head-cell'
 
 // import { useParams } from 'react-router-dom'
 
@@ -37,7 +36,6 @@ export const ProductList = () => {
     // category
     '',
   )
-
   const flatData = useMemo(
     () => data?.pages?.flatMap((page) => page.data) ?? [],
     [data],
@@ -117,9 +115,9 @@ export const ProductList = () => {
               px: 2,
             }}
           >
-            <CartButton row={info.row} />
-            <GalleryButton row={info.row} />
-            <InfoButton row={info.row} />
+            <CartAction row={info.row} />
+            <GalleryAction row={info.row} />
+            <InfoAction row={info.row} />
           </Stack>
         ),
         meta: {
@@ -199,30 +197,15 @@ export const ProductList = () => {
       ref={tableContainerRef}
       sx={{
         height: '50vh',
-        minHeight: '10vh',
         resize: 'vertical',
       }}
     >
-      <Table size="small" aria-label="products table" sx={{ minWidth: 650 }}>
-        <TableHead sx={{ position: 'sticky', top: 0, zIndex: 1 }}>
+      <Table size="small" aria-label="products table">
+        <TableHead>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} sx={{ display: 'flex' }}>
               {headerGroup.headers.map((header) => (
-                <TableCell
-                  key={header.id}
-                  sx={{
-                    flexGrow: header.getSize() === 150 ? 1 : 0,
-                    width: header.getSize(),
-                    textAlign: header.column.columnDef.meta?.textAlign,
-                  }}
-                >
-                  <Typography fontWeight={600}>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </Typography>
-                </TableCell>
+                <VirtualTableHeadCell key={header.id} header={header} />
               ))}
             </TableRow>
           ))}

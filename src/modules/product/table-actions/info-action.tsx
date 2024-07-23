@@ -10,7 +10,7 @@ type Props = {
   row: Row<IProduct>
 }
 
-export const InfoButton = ({ row }: Props) => {
+export const InfoAction = ({ row }: Props) => {
   const openInfo = useBoolean(false)
 
   return (

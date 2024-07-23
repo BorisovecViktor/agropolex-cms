@@ -15,7 +15,7 @@ import { grey } from '@mui/material/colors'
 import { useFilters } from 'api/hooks/use-filters'
 import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 
-export const ProductFilters = () => {
+export const Filters = () => {
   const { data } = useFilters()
 
   return (

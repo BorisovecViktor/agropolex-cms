@@ -3,14 +3,14 @@ import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import { grey } from '@mui/material/colors'
 import { ChangeEvent, memo, useState } from 'react'
-import { productMinAmount } from 'app/constants'
+import { PRODUCT_MIN_AMOUNT } from 'app/constants'
 
 type Props = {
   buttonColor?: string
 }
 
 export const CartItemAmount = memo(({ buttonColor }: Props) => {
-  const [amount, setAmount] = useState<number>(productMinAmount)
+  const [amount, setAmount] = useState<number>(PRODUCT_MIN_AMOUNT)
 
   const buttonStyles = {
     '&:hover': { backgroundColor: buttonColor ?? grey[200] },
@@ -22,8 +22,8 @@ export const CartItemAmount = memo(({ buttonColor }: Props) => {
   }
 
   const handleChangeAmount = (e: ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) >= productMinAmount) {
-      setAmount(Math.max(Number(e.target.value), productMinAmount))
+    if (Number(e.target.value) >= PRODUCT_MIN_AMOUNT) {
+      setAmount(Math.max(Number(e.target.value), PRODUCT_MIN_AMOUNT))
     }
   }
 
@@ -51,7 +51,7 @@ export const CartItemAmount = memo(({ buttonColor }: Props) => {
         size="small"
         onClick={handleDecreaseAmount}
         sx={{ ...buttonStyles, mr: 1 }}
-        disabled={amount === productMinAmount}
+        disabled={amount === PRODUCT_MIN_AMOUNT}
       >
         <RemoveIcon sx={iconStyles} />
       </IconButton>

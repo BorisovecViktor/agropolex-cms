@@ -72,6 +72,21 @@ const theme = createTheme({
         },
       },
     },
+    MuiTableContainer: {
+      styleOverrides: {
+        root: { minHeight: '10vh' },
+      },
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: { minWidth: 650 },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: { position: 'sticky', top: 0, zIndex: 1 },
+      },
+    },
     MuiTableRow: {
       styleOverrides: {
         root: {

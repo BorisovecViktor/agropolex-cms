@@ -1,9 +1,8 @@
 import {
-  IconButton,
   Paper,
+  Stack,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
@@ -16,21 +15,21 @@ import { useProducts } from 'api/hooks/use-products'
 import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   Row,
   useReactTable,
 } from '@tanstack/react-table'
 import { IProduct } from 'api/types/product'
 import { CartItemAmount } from 'components/cart'
-import { blue, red } from '@mui/material/colors'
-import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined'
+import { blue } from '@mui/material/colors'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import { VirtualTableHeadCell } from 'components/virtual-table-head-cell'
+import { RemoveButton } from 'components/button'
 
 export const ProductCartList = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null)
   const { data, status, error } = useProducts('')
-  const columns = useMemo<ColumnDef<IProduct>[]>(
+  const columns = useMemo<Array<ColumnDef<IProduct>>>(
     () => [
       {
         accessorKey: 'id',
@@ -93,28 +92,16 @@ export const ProductCartList = () => {
         accessorKey: 'actions',
         header: 'Actions',
         cell: (info) => (
-          <Tooltip title="Remove from cart" arrow placement="left">
-            <IconButton
-              aria-label="Remove from cart"
-              size="small"
-              onClick={(e) => {
-                console.log(
-                  `${info.row.original.title} -> successfully removed from cart`,
-                )
-              }}
-              sx={{
-                '&:hover': { backgroundColor: red[100] },
-                '&:hover svg': { color: red[700] },
-              }}
-            >
-              <RemoveShoppingCartOutlinedIcon
-                sx={{
-                  fontSize: '18px',
-                  color: red[500],
-                }}
-              />
-            </IconButton>
-          </Tooltip>
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '33px',
+            }}
+          >
+            <RemoveButton row={info.row} />
+          </Stack>
         ),
         meta: {
           paddingTop: 0,
@@ -166,30 +153,15 @@ export const ProductCartList = () => {
       ref={tableContainerRef}
       sx={{
         height: `calc(50vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
-        minHeight: '10vh',
         resize: 'vertical',
       }}
     >
-      <Table size="small" aria-label="cart table" sx={{ minWidth: 650 }}>
-        <TableHead sx={{ position: 'sticky', top: 0, zIndex: 1 }}>
+      <Table size="small" aria-label="cart table">
+        <TableHead>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} sx={{ display: 'flex' }}>
               {headerGroup.headers.map((header) => (
-                <TableCell
-                  key={header.id}
-                  sx={{
-                    flexGrow: header.getSize() === 150 ? 1 : 0,
-                    width: header.getSize(),
-                    textAlign: header.column.columnDef.meta?.textAlign,
-                  }}
-                >
-                  <Typography fontWeight={600}>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </Typography>
-                </TableCell>
+                <VirtualTableHeadCell key={header.id} header={header} />
               ))}
             </TableRow>
           ))}

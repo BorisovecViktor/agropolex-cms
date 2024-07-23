@@ -11,7 +11,7 @@ type Props = {
   row: Row<IProduct>
 }
 
-export const GalleryButton = ({ row }: Props) => {
+export const GalleryAction = ({ row }: Props) => {
   const openGallery = useBoolean(false)
 
   return (

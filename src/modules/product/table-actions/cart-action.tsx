@@ -8,7 +8,7 @@ type Props = {
   row: Row<IProduct>
 }
 
-export const CartButton = ({ row }: Props) => (
+export const CartAction = ({ row }: Props) => (
   <Tooltip
     title={
       // amount < minPurchaseAmount

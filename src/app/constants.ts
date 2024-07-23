@@ -1,1 +1,1 @@
-export const productMinAmount: number = 0
+export const PRODUCT_MIN_AMOUNT: number = 0
