@@ -14,7 +14,6 @@ import {
 } from '@mui/material'
 import { blue, grey } from '@mui/material/colors'
 import { ProductItem } from './product-item'
-import { useProducts } from 'api/hooks/use-products'
 import {
   ColumnDef,
   getCoreRowModel,
@@ -26,16 +25,37 @@ import { IProduct } from 'api/types/product'
 import { CartItemAmount } from 'components/cart'
 import { CartAction, GalleryAction, InfoAction } from './table-actions'
 import { VirtualTableHeadCell } from 'components/virtual-table-head-cell'
+import {
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 
 // import { useParams } from 'react-router-dom'
 
-export const ProductList = () => {
+type Props = {
+  data?: InfiniteData<AxiosResponse<Array<IProduct>, any>, unknown>
+  onFetchNextPage: (
+    options?: FetchNextPageOptions,
+  ) => Promise<
+    InfiniteQueryObserverResult<
+      InfiniteData<AxiosResponse<IProduct[], any>, unknown>,
+      Error
+    >
+  >
+  isFetching: boolean
+  status: 'error' | 'success' | 'pending'
+}
+
+export const ProductList = ({
+  data,
+  onFetchNextPage,
+  isFetching,
+  status,
+}: Props) => {
   // const { category } = useParams()
   const tableContainerRef = useRef<HTMLDivElement>(null)
-  const { data, status, error, fetchNextPage, isFetching } = useProducts(
-    // category
-    '',
-  )
   const flatData = useMemo(
     () => data?.pages?.flatMap((page) => page.data) ?? [],
     [data],
@@ -140,11 +160,11 @@ export const ProductList = () => {
           !isFetching &&
           totalFetched < totalDBRowCount
         ) {
-          fetchNextPage()
+          onFetchNextPage()
         }
       }
     },
-    [fetchNextPage, isFetching, totalFetched, totalDBRowCount],
+    [onFetchNextPage, isFetching, totalFetched, totalDBRowCount],
   )
 
   useEffect(() => {
@@ -172,65 +192,63 @@ export const ProductList = () => {
     overscan: 5,
   })
 
-  if (status === 'pending') {
-    return (
-      <Box
-        display="flex"
-        flexGrow={1}
-        alignItems="center"
-        justifyContent="center"
-        sx={{ color: grey[500] }}
-      >
-        <CircularProgress color="inherit" size={37} />
-      </Box>
-    )
-  }
-
-  if (status === 'error') {
-    return <p>Error: {error?.message}</p>
-  }
-
   return (
-    <TableContainer
-      component={Paper}
-      onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
-      ref={tableContainerRef}
-      sx={{
-        height: '50vh',
-        resize: 'vertical',
-      }}
-    >
-      <Table size="small" aria-label="products table">
-        <TableHead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} sx={{ display: 'flex' }}>
-              {headerGroup.headers.map((header) => (
-                <VirtualTableHeadCell key={header.id} header={header} />
-              ))}
-            </TableRow>
-          ))}
-        </TableHead>
-        <TableBody
+    <Box position="relative">
+      <TableContainer
+        component={Paper}
+        onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
+        ref={tableContainerRef}
+        sx={{
+          height: '50vh',
+          resize: 'vertical',
+        }}
+      >
+        <Table size="small" aria-label="products table">
+          <TableHead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id} sx={{ display: 'flex' }}>
+                {headerGroup.headers.map((header) => (
+                  <VirtualTableHeadCell key={header.id} header={header} />
+                ))}
+              </TableRow>
+            ))}
+          </TableHead>
+          <TableBody
+            sx={{
+              display: 'grid',
+              height: `${rowVirtualizer.getTotalSize()}px`,
+              position: 'relative',
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<IProduct>
+
+              return (
+                <ProductItem
+                  key={row.id}
+                  row={row}
+                  virtualRow={virtualRow}
+                  rowVirtualizer={rowVirtualizer}
+                />
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {status === 'pending' && (
+        <Box
+          position="absolute"
+          top="55%"
+          left="50%"
           sx={{
-            display: 'grid',
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            position: 'relative',
+            height: '37px',
+            color: grey[500],
+            transform: 'translate(-50%, -55%)',
           }}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const row = rows[virtualRow.index] as Row<IProduct>
-
-            return (
-              <ProductItem
-                key={row.id}
-                row={row}
-                virtualRow={virtualRow}
-                rowVirtualizer={rowVirtualizer}
-              />
-            )
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          <CircularProgress color="inherit" size={37} />
+        </Box>
+      )}
+    </Box>
   )
 }

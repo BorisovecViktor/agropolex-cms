@@ -17,7 +17,6 @@ import {
 import { useProducts } from 'api/hooks/use-products'
 import { CartItem } from './cart-item'
 import { blue, grey } from '@mui/material/colors'
-import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 import { useMemo, useRef } from 'react'
 import {
   ColumnDef,
@@ -33,7 +32,7 @@ import { FavoriteButton, RemoveButton } from 'components/button'
 
 export const CartList = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null)
-  const { data, status, error } = useProducts('')
+  const { data, status, error } = useProducts({})
   const flatData = useMemo(
     () => data?.pages?.flatMap((page) => page.data) ?? [],
     [data],
@@ -165,13 +164,7 @@ export const CartList = () => {
   }
 
   return (
-    <TableContainer
-      component={Paper}
-      ref={tableContainerRef}
-      sx={{
-        height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (2 * ${MAIN_SPACING}))`,
-      }}
-    >
+    <TableContainer component={Paper} ref={tableContainerRef}>
       <Table size="small" aria-label="cart table">
         <TableHead>
           {table.getHeaderGroups().map((headerGroup) => (

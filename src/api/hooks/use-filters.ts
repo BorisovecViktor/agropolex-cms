@@ -6,7 +6,7 @@ export const useFilters = () => {
   const { category, subCategory } = useParams()
   const params = subCategory ?? (category || '')
 
-  const { data, isLoading, isSuccess, isError, refetch } = useQuery({
+  const { data, status, error } = useQuery({
     queryKey: ['filters', params],
     queryFn: () => {
       if (category) {
@@ -19,5 +19,5 @@ export const useFilters = () => {
     retry: 0,
   })
 
-  return { data, isLoading, isSuccess, isError, refetch }
+  return { data, status, error }
 }

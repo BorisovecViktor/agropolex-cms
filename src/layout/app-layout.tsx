@@ -19,6 +19,7 @@ import { RuntimeErrorDialog } from 'lib/runtime-error-dialog'
 import globalRouter from 'global-router'
 
 export const MAIN_SPACING = '8px'
+export const SEARCH_HEIGHT = '37px'
 export const HEADER_HEIGHT = '68px'
 export const FOOTER_HEIGHT = '68px'
 
@@ -59,7 +60,7 @@ export const AppLayout = () => {
   }
 
   return (
-    <Stack sx={{ height: '100vh' }}>
+    <>
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ height: HEADER_HEIGHT }}>
@@ -169,11 +170,7 @@ export const AppLayout = () => {
         </Container>
       </AppBar>
 
-      <Container
-        component="main"
-        maxWidth="xl"
-        sx={{ flexGrow: 1, py: MAIN_SPACING }}
-      >
+      <Container component="main" maxWidth="xl" sx={{ py: MAIN_SPACING }}>
         <ErrorBoundary FallbackComponent={RuntimeErrorDialog}>
           <Outlet />
         </ErrorBoundary>
@@ -181,16 +178,14 @@ export const AppLayout = () => {
 
       <Stack
         component="footer"
-        direction="row"
-        alignItems="center"
+        justifyContent="center"
         sx={{
-          minHeight: FOOTER_HEIGHT,
+          height: FOOTER_HEIGHT,
           borderTop: `1px solid ${grey[300]}`,
-          backgroundColor: 'white',
         }}
       >
         <Container maxWidth="xl">&copy; Agropolex 2024</Container>
       </Stack>
-    </Stack>
+    </>
   )
 }

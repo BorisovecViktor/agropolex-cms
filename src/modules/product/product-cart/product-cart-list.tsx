@@ -11,8 +11,12 @@ import {
 } from '@mui/material'
 import { useMemo, useRef } from 'react'
 import { ProductCartItem } from './product-cart-item'
-import { useProducts } from 'api/hooks/use-products'
-import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
+import {
+  FOOTER_HEIGHT,
+  HEADER_HEIGHT,
+  MAIN_SPACING,
+  SEARCH_HEIGHT,
+} from 'layout/app-layout'
 import {
   ColumnDef,
   getCoreRowModel,
@@ -25,10 +29,15 @@ import { blue } from '@mui/material/colors'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { VirtualTableHeadCell } from 'components/virtual-table-head-cell'
 import { RemoveButton } from 'components/button'
+import { AxiosResponse } from 'axios'
+import { InfiniteData } from '@tanstack/react-query'
 
-export const ProductCartList = () => {
+type Props = {
+  data?: InfiniteData<AxiosResponse<Array<IProduct>, any>, unknown>
+}
+
+export const ProductCartList = ({ data }: Props) => {
   const tableContainerRef = useRef<HTMLDivElement>(null)
-  const { data, status, error } = useProducts('')
   const columns = useMemo<Array<ColumnDef<IProduct>>>(
     () => [
       {
@@ -139,20 +148,12 @@ export const ProductCartList = () => {
     overscan: 5,
   })
 
-  if (status === 'pending') {
-    return null
-  }
-
-  if (status === 'error') {
-    return <p>Error: {error?.message}</p>
-  }
-
   return (
     <TableContainer
       component={Paper}
       ref={tableContainerRef}
       sx={{
-        height: `calc(50vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (3 * ${MAIN_SPACING}))`,
+        height: `calc(50vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - ${SEARCH_HEIGHT} - (4 * ${MAIN_SPACING}))`,
         resize: 'vertical',
       }}
     >
