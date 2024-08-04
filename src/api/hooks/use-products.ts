@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { productService } from 'api/services'
 
@@ -8,10 +9,19 @@ type Props = {
 }
 
 export const useProducts = ({ limit, search, filters }: Props) => {
+  const { category, subCategory } = useParams()
+  const id = subCategory ?? (category || '')
+
   const { data, status, error, fetchNextPage, isFetching } = useInfiniteQuery({
-    queryKey: ['products', { search, filters }],
+    queryKey: ['products', { id, search, filters }],
     queryFn: ({ pageParam }) =>
-      productService.getProduct({ limit, search, page: pageParam, filters }),
+      productService.getProducts({
+        id,
+        page: pageParam,
+        limit,
+        search,
+        filters,
+      }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.data.length ? allPages.length + 1 : undefined,

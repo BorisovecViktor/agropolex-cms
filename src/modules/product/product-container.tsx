@@ -13,6 +13,7 @@ export const ProductContainer = () => {
   const [search, setSearch] = useState<string>('')
   const [filters, setFilters] = useState<Array<string>>([])
   const params = {
+    limit: 50,
     search,
     filters,
   }
@@ -59,7 +60,11 @@ export const ProductContainer = () => {
   }
 
   return (
-    <Box display="grid" gap={MAIN_SPACING} gridTemplateColumns="20% 80%">
+    <Box
+      display="grid"
+      gap={MAIN_SPACING}
+      gridTemplateColumns={`20% calc(80% - ${MAIN_SPACING})`}
+    >
       <Filters data={filtersData} onChange={onChangeFilter} />
       <Stack spacing={MAIN_SPACING}>
         <Box width="400px">

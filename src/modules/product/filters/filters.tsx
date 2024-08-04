@@ -14,6 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { grey } from '@mui/material/colors'
 import { FOOTER_HEIGHT, HEADER_HEIGHT, MAIN_SPACING } from 'layout/app-layout'
 import { IFilter } from 'api/types/filter'
+import { v4 as uuid } from 'uuid'
 
 type Props = {
   data?: Array<IFilter>
@@ -22,10 +23,14 @@ type Props = {
 
 export const Filters = ({ data, onChange }: Props) => (
   <Paper
-    sx={{
-      height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (2 * ${MAIN_SPACING}))`,
-      overflow: 'auto',
-    }}
+    sx={
+      data && data[0]?.content
+        ? { boxShadow: 'none' }
+        : {
+            height: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT} - (2 * ${MAIN_SPACING}))`,
+            overflow: 'auto',
+          }
+    }
   >
     {data?.map(({ id, title, content }) =>
       content ? (
@@ -43,15 +48,23 @@ export const Filters = ({ data, onChange }: Props) => (
           </AccordionSummary>
           <AccordionDetails>
             <FormGroup>
-              {content.map(({ id, title }) => (
-                <FormControlLabel
-                  key={id}
-                  control={
-                    <Checkbox size="small" id={id} onChange={onChange} />
-                  }
-                  label={title}
-                />
-              ))}
+              {content.map(({ id, title }) => {
+                const uniqueId = uuid()
+
+                return (
+                  <FormControlLabel
+                    key={`${id}_${uniqueId}`}
+                    control={
+                      <Checkbox
+                        size="small"
+                        id={`${id}_${uniqueId}`}
+                        onChange={onChange}
+                      />
+                    }
+                    label={title}
+                  />
+                )
+              })}
             </FormGroup>
           </AccordionDetails>
         </Accordion>

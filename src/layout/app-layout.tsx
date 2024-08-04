@@ -170,7 +170,14 @@ export const AppLayout = () => {
         </Container>
       </AppBar>
 
-      <Container component="main" maxWidth="xl" sx={{ py: MAIN_SPACING }}>
+      <Container
+        component="main"
+        maxWidth="xl"
+        sx={{
+          minHeight: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})`,
+          py: MAIN_SPACING,
+        }}
+      >
         <ErrorBoundary FallbackComponent={RuntimeErrorDialog}>
           <Outlet />
         </ErrorBoundary>

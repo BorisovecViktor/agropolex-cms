@@ -21,7 +21,7 @@ export const CartAction = ({ row }: Props) => (
       aria-label="Add to cart"
       size="small"
       onClick={() =>
-        console.log(`${row.original.title} -> successfully added to cart`)
+        console.log(`${row.original.name} -> successfully added to cart`)
       }
       // disabled={amount < minPurchaseAmount}
       sx={{

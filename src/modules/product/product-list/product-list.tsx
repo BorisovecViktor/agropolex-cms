@@ -70,13 +70,10 @@ export const ProductList = ({
         cell: (info) => (
           <Typography component="span">{`${info.getValue()}`}</Typography>
         ),
-        meta: {
-          textAlign: 'center',
-        },
       },
       {
-        accessorKey: 'title',
-        header: 'Manufacturer',
+        accessorKey: 'name',
+        header: 'Name',
         cell: (info) => (
           <Tooltip title={`${info.getValue()}`} arrow placement="left">
             <Typography component="span">{`${info.getValue()}`}</Typography>
@@ -88,18 +85,18 @@ export const ProductList = ({
           textOverflow: 'ellipsis',
         },
       },
-      {
-        accessorKey: 'completed',
-        header: 'Availability',
-        cell: (info) => (
-          <Typography component="span">
-            {info.getValue() ? 'Yes' : 'No'}
-          </Typography>
-        ),
-        meta: {
-          textAlign: 'center',
-        },
-      },
+      // {
+      //   accessorKey: 'completed',
+      //   header: 'Availability',
+      //   cell: (info) => (
+      //     <Typography component="span">
+      //       {info.getValue() ? 'Yes' : 'No'}
+      //     </Typography>
+      //   ),
+      //   meta: {
+      //     textAlign: 'center',
+      //   },
+      // },
       {
         accessorKey: 'amount',
         header: 'Amount',
@@ -111,16 +108,16 @@ export const ProductList = ({
           textAlign: 'center',
         },
       },
-      {
-        accessorKey: 'userId',
-        header: 'Total price',
-        cell: (info) => (
-          <Typography component="span">{`${info.getValue()} UAH`}</Typography>
-        ),
-        meta: {
-          textAlign: 'center',
-        },
-      },
+      // {
+      //   accessorKey: 'userId',
+      //   header: 'Total price',
+      //   cell: (info) => (
+      //     <Typography component="span">{`${info.getValue()} UAH`}</Typography>
+      //   ),
+      //   meta: {
+      //     textAlign: 'center',
+      //   },
+      // },
       {
         accessorKey: 'actions',
         header: 'Actions',

@@ -15,7 +15,7 @@ export const RemoveButton = ({ row }: Props) => (
       size="small"
       onClick={(e) => {
         e.stopPropagation()
-        console.log(`${row.original.title} -> successfully removed from cart`)
+        console.log(`${row.original.name} -> successfully removed from cart`)
       }}
       sx={{
         '&:hover': { backgroundColor: red[100] },

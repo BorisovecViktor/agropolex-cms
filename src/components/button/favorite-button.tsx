@@ -15,7 +15,7 @@ export const FavoriteButton = ({ row }: Props) => (
       size="small"
       onClick={(e) => {
         e.stopPropagation()
-        console.log(`${row.original.title} -> successfully add to favorite`)
+        console.log(`${row.original.name} -> successfully add to favorite`)
       }}
       sx={{
         '&:hover': { backgroundColor: blue[100] },

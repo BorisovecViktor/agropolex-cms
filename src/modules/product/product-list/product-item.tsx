@@ -20,7 +20,7 @@ export const ProductItem = memo(
       <TableRow
         data-index={virtualRow.index}
         ref={(node) => rowVirtualizer.measureElement(node)}
-        onClick={() => navigate(`/products/${row.id}`)}
+        onClick={() => navigate(`/scu/${row.id}`)}
         sx={{
           display: 'flex',
           position: 'absolute',

@@ -16,7 +16,7 @@ export const InfoAction = ({ row }: Props) => {
   return (
     <>
       <CustomDialog
-        title={row.original.title}
+        title={row.original.name}
         isOpen={openInfo.isTrue}
         onClose={openInfo.setFalse}
         aria="Info"

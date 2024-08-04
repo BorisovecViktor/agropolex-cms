@@ -17,7 +17,7 @@ export const GalleryAction = ({ row }: Props) => {
   return (
     <>
       <CustomDialog
-        title={row.original.title}
+        title={row.original.name}
         isOpen={openGallery.isTrue}
         onClose={openGallery.setFalse}
         aria="Image gallery"
