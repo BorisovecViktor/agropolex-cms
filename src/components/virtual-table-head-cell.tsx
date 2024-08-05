@@ -14,7 +14,7 @@ export const VirtualTableHeadCell = ({ header }: Props) => {
       sx={{
         flexGrow: getSize() === 150 ? 1 : 0,
         width: getSize(),
-        textAlign: column.columnDef.meta?.textAlign 
+        // textAlign: column.columnDef.meta?.textAlign 
       }}
     >
       <Typography fontWeight={600}>
