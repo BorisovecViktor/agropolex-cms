@@ -3,7 +3,7 @@ import { NavBarItem } from './nav-bar-item'
 import { Box, List } from '@mui/material'
 
 export const Navbar = () => {
-  const { data: categories } = useCategories(true)
+  const { data: categories } = useCategories()
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -11,7 +11,7 @@ export const Navbar = () => {
         <List component="nav" sx={{ display: { xs: 'none', md: 'flex' } }}>
           <List sx={{ display: 'flex', flexWrap: 'wrap' }}>
             {categories.map((category) => (
-              <NavBarItem key={category.id} item={category} />
+              <NavBarItem key={category.id} category={category} />
             ))}
           </List>
         </List>

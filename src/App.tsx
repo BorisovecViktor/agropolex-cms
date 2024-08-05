@@ -10,7 +10,6 @@ import {
   ProductsPage,
   ProductPage,
   HomePage,
-  // BlogPage,
   NotFoundPage,
   CartPage,
   ProfilePage,

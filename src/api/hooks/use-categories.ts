@@ -1,12 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { categoryService } from 'api/services'
 
-export const useCategories = (isEnabled: boolean) => {
+export const useCategories = () => {
   const { data, isLoading, isSuccess, isError } = useQuery({
     queryKey: ['categories'],
     queryFn: () => categoryService.getCategories(),
     select: (data) => data.data,
-    enabled: isEnabled,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     retry: 0,

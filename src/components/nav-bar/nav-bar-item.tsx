@@ -6,11 +6,11 @@ import { blue } from '@mui/material/colors'
 import { ICategory } from 'api/types/category'
 
 type Props = {
-  item: ICategory
+  category: ICategory
 }
 
-export const NavBarItem = ({ item }: Props) => {
-  const { path, name, subCategories } = item
+export const NavBarItem = ({ category }: Props) => {
+  const { id, name, subCategories } = category
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -19,10 +19,16 @@ export const NavBarItem = ({ item }: Props) => {
       onMouseLeave={() => setIsOpen(false)}
       sx={{ width: 'auto', '&:hover': { backgroundColor: blue[50] } }}
     >
-      <CustomLink to={`/categories${path}`} fontWeight={600}>
+      <CustomLink to={`/categories/${id}`} fontWeight={600}>
         {name}
       </CustomLink>
-      {isOpen && <NavBarSubItems subItems={subCategories} onOpen={setIsOpen} />}
+      {isOpen && (
+        <NavBarSubItems
+          categoryId={id}
+          subCategories={subCategories}
+          onOpen={setIsOpen}
+        />
+      )}
     </ListItem>
   )
 }

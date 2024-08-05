@@ -4,13 +4,10 @@ import {
   ImageListItemBar,
   imageListItemClasses,
 } from '@mui/material'
+import { ICategory } from 'api/types/category'
 
 type Props = {
-  data: Array<{
-    img: string
-    title: string
-    author: string
-  }>
+  data: Array<ICategory>
 }
 
 export const ImageList = ({ data }: Props) => {
@@ -32,16 +29,16 @@ export const ImageList = ({ data }: Props) => {
       }}
     >
       {data.map((item) => (
-        <ImageListItem key={item.img} sx={{ cursor: 'pointer' }}>
+        <ImageListItem key={item.id} sx={{ cursor: 'pointer' }}>
           <img
-            src={`${item.img}?w=500&fit=crop&auto=format`}
-            alt={item.title}
+            src={item.url}
+            alt={item.name}
             loading="lazy"
             style={{ borderRadius: '6px' }}
           />
           <ImageListItemBar
-            title={item.title}
-            subtitle={<span>by: {item.author}</span>}
+            title={item.name}
+            subtitle={<span>by: {item.id}</span>}
             sx={{
               borderBottomRightRadius: '6px',
               borderBottomLeftRadius: '6px',
